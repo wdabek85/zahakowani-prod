@@ -1,0 +1,12 @@
+.faq-list, .faq-item{
+    display: flex;
+    flex-direction: column;
+}
+
+.faq-list{
+    gap: 16px;
+}
+
+.faq-item{
+    gap: 8px;
+}

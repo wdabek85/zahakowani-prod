@@ -1,0 +1,46 @@
+.product-spec, .product-spec__list, .product-spec__row, .under-spec{
+    display: flex;
+}
+
+.product-spec, .product-spec__list{
+    flex-direction: column;
+}
+
+.product-spec{
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.product-spec__list{
+    gap:16px;
+}
+
+.product-spec__row{
+  display: flex;
+  justify-content: space-between;
+  color: #212121;
+}
+.product-spec__label{
+    min-width: 150px;
+    flex-shrink: 0;
+}
+.product-spec__value{
+    overflow-wrap: break-word;
+    word-break: normal;
+    min-width: 0;
+}
+
+.under-spec{
+    justify-content: space-between;
+}
+
+.under-spec a{
+    text-decoration: underline;
+}
+
+@media (min-width: 1080px){
+    .product-spec__row{
+        gap: 8px;
+        justify-content: start;
+    }
+}

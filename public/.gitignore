@@ -1,0 +1,28 @@
+# WordPress core (nie wersjonujemy)
+wp-admin/
+wp-includes/
+*.php
+!index.php
+!wp-*.php
+
+# Sekrety
+wp-config.php
+
+# Uploady (opcjonalnie - polecam wykluczyć)
+wp-content/uploads/
+
+# Cache i śmieci
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup*/
+wp-content/updraft/
+wp-content/wflogs/
+wp-content/litespeed/
+wp-content/ai1wm-backups/
+*.log
+
+# IDE/OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

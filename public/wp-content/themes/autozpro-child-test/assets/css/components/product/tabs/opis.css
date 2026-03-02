@@ -1,0 +1,10 @@
+.product-tab-section .container{
+    max-width: 1440px;
+    padding: 24px 20px;
+}
+
+@media (min-width: 1080px){
+    .product-tab-section .container{
+        padding: 24px 80px;
+    }
+}

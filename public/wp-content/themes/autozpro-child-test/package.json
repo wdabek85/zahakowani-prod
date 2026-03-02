@@ -1,0 +1,15 @@
+{
+    "name": "autozpro-child-test",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "vite": "^6.0.0",
+        "postcss": "^8.4.0",
+        "postcss-nesting": "^13.0.0",
+        "autoprefixer": "^10.4.0"
+    }
+}

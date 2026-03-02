@@ -1,0 +1,17 @@
+.product-promo-banner{
+    background-color: #193CB8;
+    display: flex;
+    color: white;
+    gap: 8px;
+    padding:  8px 8px 8px 0;
+    border-radius: 8px;
+    align-items: center;
+}
+
+.product-promo-banner__link{
+    color: white;
+}
+
+.product-promo-banner__text{
+    margin: 0 !important;
+}

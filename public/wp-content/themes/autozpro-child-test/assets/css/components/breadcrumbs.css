@@ -1,0 +1,168 @@
+/* ── WooCommerce Breadcrumb (bazowe) ─────────────── */
+
+.woocommerce-breadcrumb {
+    margin-bottom: 0 !important;
+    padding: 16px 20px;
+    font-size: 14px;
+    max-width: 1440px;
+    margin: 0 auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.woocommerce-breadcrumb::-webkit-scrollbar {
+    display: none;
+}
+
+.woocommerce-breadcrumb a {
+    color: #666;
+    text-decoration: none;
+}
+
+.woocommerce-breadcrumb a:hover {
+    color: #000;
+}
+
+@media (min-width: 1080px) {
+    .woocommerce-breadcrumb {
+        padding: 16px 0;
+    }
+}
+
+/* ── Post/Poradnik Breadcrumbs ────────────────────── */
+
+.post-breadcrumbs {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    color: #212121;
+    margin-bottom: 16px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+
+.post-breadcrumbs::-webkit-scrollbar {
+    display: none;
+}
+
+.post-breadcrumbs a {
+    color: #666;
+    text-decoration: none;
+}
+
+.post-breadcrumbs a:hover {
+    color: #000;
+}
+
+.post-breadcrumbs span {
+    font-weight: 600;
+    color: #212121;
+}
+
+/* ── Breadcrumb Bar (archiwum — z konsultacją) ──── */
+
+.breadcrumb-bar {
+    max-width: 1440px;
+    margin: 0 auto;
+    /* padding: 0 20px; */
+}
+
+/* Ostatni breadcrumb pogrubiony w barze */
+.breadcrumb-bar .woocommerce-breadcrumb {
+    padding: 16px 0;
+    font-weight: 600;
+    color: var(--color-secondary);
+}
+
+.breadcrumb-bar .woocommerce-breadcrumb a {
+    font-weight: 400;
+}
+
+/* ── Konsultacja ────────────────────────────────── */
+
+.breadcrumb-consult {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.breadcrumb-consult__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.breadcrumb-consult__text span {
+    color: var(--color-text-muted);
+    font-size: 12px;
+}
+
+.breadcrumb-consult__text strong {
+    color: var(--color-secondary);
+    font-size: 14px;
+}
+
+.breadcrumb-consult__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.breadcrumb-consult__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.breadcrumb-consult__link:hover {
+    color: var(--color-primary-main);
+}
+
+.breadcrumb-consult__link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--color-accent);
+}
+
+/* ── Desktop ≥1080px ────────────────────────────── */
+
+@media (min-width: 1080px) {
+    .breadcrumb-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 0;
+    }
+
+    .breadcrumb-bar__right {
+        padding: 12px 0;
+    }
+}
+
+/* ── Mobile <1080px ─────────────────────────────── */
+
+@media (max-width: 1079px) {
+    .breadcrumb-bar__right {
+        padding: 0 0 16px;
+        border-bottom: 1px solid var(--color-border);
+        margin-bottom: 8px;
+    }
+
+    .breadcrumb-consult {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .woocommerce-breadcrumb{
+        padding: 16px 0px;
+    }
+}

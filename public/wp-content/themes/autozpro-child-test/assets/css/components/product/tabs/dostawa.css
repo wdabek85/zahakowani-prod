@@ -1,0 +1,74 @@
+/* Sekcja dostawy */
+.delivery-subtitle {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.delivery-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Pojedyncza metoda dostawy */
+.delivery-method {
+    display: grid;
+    grid-template-columns: 200px 1fr 400px;
+    align-items: center;
+    gap: 32px;
+    padding: 24px 32px;
+    background: white;
+}
+
+.delivery-method:nth-child(odd) {
+    background: #F5F5F5; /* szare tło co drugi */
+}
+
+.delivery-method__name {
+    color: #111827;
+    font-weight: 500;
+}
+
+.delivery-method__logo {
+    display: flex;
+    justify-content: center;
+}
+
+.delivery-method__logo img {
+    height: 50px;
+    width: auto;
+    max-width: 150px;
+    object-fit: contain;
+}
+
+.delivery-method__price {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+}
+
+.delivery-method__price .text-accent {
+    color: #10b981; /* zielony GRATIS */
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .delivery-method {
+        grid-template-columns: 1fr;
+        gap: 16px;
+        text-align: center;
+    }
+    
+    .delivery-method__price {
+        text-align: center;
+    }
+    
+    .delivery-method__logo img {
+        height: 40px;
+    }
+}

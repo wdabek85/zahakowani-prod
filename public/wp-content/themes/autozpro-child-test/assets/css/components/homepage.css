@@ -1,0 +1,712 @@
+/* ===================================
+   Homepage — main styles
+   =================================== */
+
+.homepage {
+    background: #fff;
+}
+
+/* ---------- Section defaults ---------- */
+.homepage section {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 24px 80px;
+}
+
+/* ===================================
+   Section 1: Hero v3 — full-width dark bg
+   =================================== */
+.homepage .hp-hero {
+    max-width: none;
+    background: linear-gradient(135deg, #1a1a2e 0%, #1a2e3a 60%, #1a3a3a 100%);
+    padding: 0;
+    border-radius: 16px;
+    margin: 0 16px;
+}
+
+.hp-hero__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 40px;
+    padding: 48px 80px;
+    align-items: start;
+}
+
+/* -- LEWA: treść -- */
+.hp-hero__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 340px;
+}
+
+.hp-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #10b981;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    align-self: flex-start;
+    margin-bottom: 28px;
+}
+
+.hp-hero__badge svg {
+    flex-shrink: 0;
+}
+
+.hp-hero__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.5px;
+    color: #fff;
+    margin: 0 0 20px;
+}
+
+.hp-hero__title--accent {
+    color: #10b981;
+}
+
+.hp-hero__desc {
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    color: #a1a1aa;
+    margin: 0 0 32px;
+    max-width: 480px;
+}
+
+/* 3 proof points na dole */
+.hp-hero__proofs {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+
+.hp-hero__proof {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hp-hero__proof-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    flex-shrink: 0;
+}
+
+.hp-hero__proof-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.hp-hero__proof-text strong {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.hp-hero__proof-text span {
+    font-size: 12px;
+    color: #a1a1aa;
+}
+
+/* -- PRAWA: wyszukiwarka -- */
+.hp-hero__search-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 8px;
+}
+
+.hp-hero__search {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+}
+
+.hp-hero__search-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.hp-hero__search-header strong {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-secondary, #111827);
+}
+
+.hp-hero__search-sub {
+    font-size: 13px;
+    color: var(--color-text-muted, #6b7280);
+    margin: 0 0 16px;
+}
+
+.hp-hero__search .vehicle-search {
+    background: transparent;
+    border-radius: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.hp-hero__search .vehicle-search__title {
+    display: none;
+}
+
+.hp-hero__search .vehicle-search__button {
+    width: 100%;
+    background: #10b981;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.hp-hero__search .vehicle-search__button:hover {
+    background: #059669;
+}
+
+.hp-hero__search .vehicle-search__button:disabled {
+    background: #d1d5db;
+    cursor: not-allowed;
+}
+
+/* VIN text */
+.hp-hero__vin-text {
+    font-size: 13px;
+    color: #a1a1aa;
+    text-align: center;
+    margin: 0;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.hp-hero__vin-link {
+    color: #10b981;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.hp-hero__vin-link:hover {
+    text-decoration: underline;
+}
+
+.hp-hero__vin-phone {
+    font-weight: 700;
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* ===================================
+   Section 2: Brands
+   =================================== */
+.hp-brands {
+    background: #fff;
+}
+
+.hp-brands__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    color: #000;
+    margin: 0 0 16px;
+}
+
+.hp-brands__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.hp-brands__pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 24px;
+    background: var(--color-primary-main, #193CB8);
+    border: 1px solid #1C398E;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.hp-brands__pill:hover {
+    background: #1530a0;
+    color: #fff;
+}
+
+/* ===================================
+   Section 4: Promo Strip — full-width breakout
+   =================================== */
+.homepage > .promo-strip {
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.homepage > .promo-strip .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 80px;
+}
+
+/* ===================================
+   Section 3: Featured Products
+   =================================== */
+.hp-featured {
+    background: #fff;
+}
+
+.hp-featured__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    color: #000;
+    margin: 0 0 16px;
+}
+
+.hp-featured__grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;          /* Firefox */
+    -ms-overflow-style: none;       /* IE/Edge */
+}
+
+.hp-featured__grid::-webkit-scrollbar {
+    display: none;                  /* Chrome/Safari */
+}
+
+/* ===================================
+   Section: Trust Stats (homepage)
+   =================================== */
+.hp-trust-stats {
+    background: #fff;
+}
+
+.hp-trust-stats__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    color: #000;
+    margin: 0 0 16px;
+}
+
+/* ===================================
+   Section: Reviews (TrustedIndex)
+   =================================== */
+.hp-reviews {
+    background: #fff;
+}
+
+.hp-reviews__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    color: #000;
+    margin: 0 0 16px;
+}
+
+/* ===================================
+   Section 5: Guides
+   =================================== */
+.hp-guides {
+    background: #fff;
+}
+
+.hp-guides__header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.hp-guides__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 38px;
+    color: #1d1d1d;
+    margin: 0;
+}
+
+.hp-guides__more {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 18px;
+    color: #1C398E;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.hp-guides__more:hover {
+    text-decoration: underline;
+    color: #1C398E;
+}
+
+.hp-guides__grid {
+    display: flex;
+    gap: 8px;
+}
+
+.hp-guides__card {
+    flex: 1 0 0;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    text-decoration: none;
+    color: inherit;
+    min-width: 0;
+}
+
+.hp-guides__thumb {
+    width: 160px;
+    min-width: 160px;
+    height: 86px;
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.hp-guides__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hp-guides__text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+}
+
+.hp-guides__card-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18px;
+    color: #000;
+    margin: 0;
+}
+
+.hp-guides__card-link {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    color: #1C398E;
+}
+
+.hp-guides__card:hover .hp-guides__card-link {
+    text-decoration: underline;
+}
+
+/* ===================================
+   Section 6: Blog
+   =================================== */
+.hp-blog {
+    background: #fff;
+}
+
+.hp-blog__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 38px;
+    color: #000;
+    margin: 0 0 16px;
+}
+
+.hp-blog__grid {
+    display: flex;
+    gap: 16px;
+}
+
+.hp-blog__card {
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 0;
+}
+
+.hp-blog__thumb {
+    display: block;
+    width: 100%;
+    height: 206px;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.hp-blog__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hp-blog__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hp-blog__meta {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    color: #A1A1A1;
+    margin: 0;
+}
+
+.hp-blog__heading {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+    color: #000;
+    text-decoration: none;
+    margin: 0;
+}
+
+.hp-blog__heading:hover {
+    color: #1C398E;
+}
+
+.hp-blog__excerpt {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    color: #000;
+    margin: 0;
+}
+
+.hp-blog__more {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 14px;
+    color: #1C398E;
+    text-decoration: none;
+}
+
+.hp-blog__more:hover {
+    text-decoration: underline;
+    color: #1C398E;
+}
+
+/* ===================================
+   Section 7: SEO Text
+   =================================== */
+.hp-seo {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.hp-seo__block h1,
+.hp-seo__block h2,
+.hp-seo__block h3,
+.hp-seo__block h4,
+.hp-seo__block h5,
+.hp-seo__block h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 8px;
+}
+
+.hp-seo__block h1 { font-size: 24px; line-height: 30px; }
+.hp-seo__block h2 { font-size: 22px; line-height: 28px; }
+.hp-seo__block h3 { font-size: 20px; line-height: 24px; }
+.hp-seo__block h4 { font-size: 18px; line-height: 22px; }
+.hp-seo__block h5,
+.hp-seo__block h6 { font-size: 16px; line-height: 20px; }
+
+.hp-seo__block p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #333;
+    margin: 0 0 16px;
+}
+
+.hp-seo__block p:last-child {
+    margin-bottom: 0;
+}
+
+.hp-seo__block ul,
+.hp-seo__block ol {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333;
+    margin: 0 0 16px;
+    padding-left: 24px;
+}
+
+.hp-seo__block li {
+    margin-bottom: 4px;
+}
+
+.hp-seo__block a {
+    color: #1C398E;
+    text-decoration: underline;
+}
+
+.hp-seo__block a:hover {
+    color: #0f2461;
+}
+
+.hp-seo__block strong {
+    font-weight: 700;
+    color: #000;
+}
+
+.hp-seo__block img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 8px 0;
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+/* Tablet */
+@media (max-width: 1024px) {
+    .homepage .hp-hero {
+        margin: 0 12px;
+    }
+
+    .hp-hero__container {
+        grid-template-columns: 1fr 340px;
+        padding: 36px 40px;
+        gap: 24px;
+    }
+
+    .hp-hero__content {
+        min-height: auto;
+    }
+
+    .hp-hero__title {
+        font-size: 34px;
+    }
+
+    .hp-hero__proofs {
+        gap: 16px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .homepage section {
+        padding: 24px 16px;
+    }
+
+    .homepage .hp-hero {
+        border-radius: 12px;
+        margin: 0 8px;
+    }
+
+    .hp-hero__container {
+        grid-template-columns: 1fr;
+        padding: 28px 20px;
+        gap: 28px;
+    }
+
+    .hp-hero__content {
+        min-height: auto;
+    }
+
+    .hp-hero__badge {
+        font-size: 12px;
+        padding: 5px 12px;
+        margin-bottom: 20px;
+    }
+
+    .hp-hero__title {
+        font-size: 30px;
+        margin-bottom: 14px;
+    }
+
+    .hp-hero__desc {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .hp-hero__proofs {
+        gap: 14px;
+    }
+
+    .hp-hero__proof-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .hp-hero__proof-icon svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .hp-hero__search {
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+
+    .hp-hero__vin-text {
+        font-size: 12px;
+        padding: 10px 12px;
+    }
+
+    .homepage > .promo-strip .container {
+        padding: 0 16px;
+    }
+
+    .hp-guides__grid {
+        flex-direction: column;
+    }
+
+    .hp-blog__grid {
+        flex-direction: column;
+    }
+}

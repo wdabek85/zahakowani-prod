@@ -1,0 +1,87 @@
+{
+    "name": "autohaki/autozpro",
+    "type": "project",
+    "description": "AutoHaki AutozPro — WooCommerce store on Bedrock",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.1",
+        "composer/installers": "^2.3",
+        "vlucas/phpdotenv": "^5.6",
+        "oscarotero/env": "^2.1",
+        "roots/bedrock-autoloader": "^1.0",
+        "roots/bedrock-disallow-indexing": "^2.0",
+        "roots/wordpress": "6.9.1",
+        "roots/wp-config": "1.0.0",
+        "roots/wp-password-bcrypt": "1.1.0",
+        "wpackagist-plugin/woocommerce": "9.6.3",
+        "wpackagist-plugin/elementor": "3.34.4",
+        "wpackagist-plugin/contact-form-7": "6.1.4",
+        "wpackagist-plugin/mailchimp-for-wp": "4.11.1",
+        "wpackagist-plugin/svg-support": "2.5.14",
+        "wpackagist-plugin/header-footer-elementor": "2.8.2",
+        "wpackagist-plugin/loco-translate": "2.8.1",
+        "wpackagist-plugin/woo-bought-together": "7.7.5",
+        "wpackagist-plugin/woo-smart-compare": "6.5.3",
+        "wpackagist-plugin/woo-smart-quick-view": "4.2.8",
+        "wpackagist-plugin/woo-smart-wishlist": "5.0.8",
+        "wpackagist-plugin/wpc-product-faqs": "2.2.8",
+        "wpackagist-plugin/omnibus": "3.0.4",
+        "wpackagist-plugin/wp-reviews-plugin-for-google": "13.2.7",
+        "premium/advanced-custom-fields-pro": "6.3.10",
+        "premium/inpost-pay": "1.5.5.4",
+        "premium/autozpro": "1.0.17",
+        "wpackagist-plugin/simple-local-avatars": "^2.8",
+        "wpackagist-plugin/litespeed-cache": "^7.7"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
+        },
+        {
+            "type": "path",
+            "url": "premium/plugins/advanced-custom-fields-pro",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "premium/plugins/inpost-pay",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "premium/themes/autozpro",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "extra": {
+        "installer-paths": {
+            "public/wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+            "public/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "public/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+        },
+        "wordpress-install-dir": "public/wp"
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "composer/installers": true,
+            "roots/wordpress-core-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

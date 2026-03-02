@@ -1,0 +1,52 @@
+.product-trust-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+}
+
+.trust-icon {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-transform: none;
+}
+
+.trust-icon svg {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    color: var(--color-secondary);
+}
+
+.trust-icon span {
+    font-size: 14px;
+    color: var(--color-secondary);
+}
+
+.trust-icon strong {
+    color: #10b981; 
+    font-weight: 600;
+}
+
+@media (min-width: 1080px) {
+    .product-trust-icons {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 24px;
+    }
+    
+    .trust-icon {
+        flex-direction: column;
+        text-align: center;
+        flex: 1;
+        position: relative;
+    }
+    
+    .trust-icon:nth-child(2) {
+        border-left: 1px solid #d1d5db !important;
+        border-right: 1px solid #d1d5db !important;
+    }
+}

@@ -1,0 +1,21 @@
+/* CSS Variables - kolory projektu */
+:root {
+    --color-primary-main: #193CB8;      /* niebieski z bannera */
+    --color-secondary: #111827;    /* ciemny tekst */
+    --color-accent: #10b981;       /* zielony akcent */
+    --color-border: #e5e7eb;       /* szare obramowania */
+    --color-bg-light: #f9fafb;     /* jasne tło */
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-text-muted: #6b7280;   /* szary tekst */
+}
+
+
+/* Kolory tła */
+.bg-primary-main { background-color: var(--color-primary-main); }
+.bg-light { background-color: var(--color-bg-light); }
+.bg-white { background-color: var(--color-white); }
+
+/* Kolory obramowań */
+.border-primary { border-color: var(--color-primary); }
+.border-light { border-color: var(--color-border); }

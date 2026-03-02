@@ -1,0 +1,43 @@
+.product-variants, .product-variants__chips{
+    display:flex; 
+}
+
+.product-variants{
+    flex-direction: column;
+    gap: 8px;
+}
+
+.product-variants__chips{ 
+    flex-wrap:wrap; 
+    gap: 4px; 
+}
+
+.product-variants__chip{
+  color: black;
+  border-radius:2px;
+  padding:12px;
+  text-decoration:none;
+  border:1px solid #C5C5C2;
+  background-color: #FAF9F9;
+  transition: transform .05s ease, border-color .15s ease, background-color .15s ease;
+}
+
+.product-variants__chip:hover{ 
+    border-color: rgba(0,0,0,.35); 
+}
+
+.product-variants__chip:active{ 
+    transform: translateY(1px); 
+}
+
+.product-variants__chip.is-active{
+  border-color: #3367E7;
+  border-width: 1.5px;
+  background: rgba(0,0,0,.04);
+  cursor: default;
+}
+
+.variant-tittle{
+    color: #212121;
+    margin: 0;
+}

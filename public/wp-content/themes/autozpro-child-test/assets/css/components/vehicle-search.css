@@ -1,0 +1,178 @@
+/* ===================================
+   Wyszukiwarka Po modelu — wariant NavBar
+   Figma: numerowane stepy + select cascade
+   =================================== */
+
+/* Widget wrapper reset — parent theme dodaje 25px 30px padding + białe tło */
+#secondary .widget_vehicle_search {
+    padding: 0 !important;
+    background-color: transparent !important;
+}
+
+.vehicle-search {
+    background: #fff;
+    border-radius: 8px;
+    padding: 24px;
+}
+
+/* ---------- Tytuł ---------- */
+.vehicle-search__title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 20px;
+    color: #1a1a1a;
+}
+
+/* ---------- Lista pól ---------- */
+.vehicle-search__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+/* ---------- Pojedynczy field (step + select w jednym wierszu) ---------- */
+.vehicle-search__field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0 12px;
+    height: 48px;
+    transition: border-color 0.15s;
+    box-sizing: border-box;
+}
+
+/* Active field — pomarańczowy border */
+.vehicle-search__field--active {
+    border-color: #FF6900;
+}
+
+/* Disabled field */
+.vehicle-search__field--disabled {
+    border-color: #e5e7eb;
+}
+
+/* ---------- Kółko z numerem ---------- */
+.vehicle-search__step {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    background: #d1d5db;
+    transition: background 0.15s;
+}
+
+.vehicle-search__field--active .vehicle-search__step {
+    background: #FF6900;
+}
+
+/* ---------- Select — pełny reset parent theme ---------- */
+/* Parent theme: select:not([size]):not([multiple]) ma specificity 0,2,1
+   Musimy bić !important albo wyższy selektor */
+.vehicle-search .vehicle-search__field select {
+    flex: 1;
+    min-width: 0;
+    height: 44px;
+    margin: 0 !important;
+    padding: 0 24px 0 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+    cursor: pointer;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+
+    /* Custom chevron */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' viewBox='0 0 16 16'%3E%3Cpath stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='m4 6 4 4 4-4'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0 center !important;
+    background-size: 16px !important;
+}
+
+.vehicle-search .vehicle-search__field select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Disabled select */
+.vehicle-search .vehicle-search__field--disabled select {
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* ---------- Loading state ---------- */
+.vehicle-search__field--loading {
+    position: relative;
+}
+
+.vehicle-search .vehicle-search__field--loading select {
+    background-image: none !important;
+}
+
+.vehicle-search__field--loading::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    margin-top: -9px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d1d5db;
+    border-top-color: #FF6900;
+    border-radius: 50%;
+    animation: vs-spin 0.6s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes vs-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------- Przycisk SZUKAJ ---------- */
+.vehicle-search__button {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #fff;
+    background: #193CB8;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.vehicle-search__button:hover:not(:disabled) {
+    background: #1530a0;
+}
+
+.vehicle-search__button:disabled {
+    background: #193CB8;
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+@media (max-width: 680px){
+    .vehicle-search{
+        padding: 0;
+    }
+}

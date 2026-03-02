@@ -1,0 +1,97 @@
+/* Nawigacja zakładek */
+.product-tabs-nav {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-left: calc(50% - 50vw);
+    width: 100vw;
+}
+
+.product-tabs-nav .container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 80px;
+    display: flex;
+    gap: 40px;
+}
+
+.tab-link {
+    padding: 16px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #6b7280;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.tab-link:hover {
+    color: #111827;
+}
+
+.tab-link.active {
+    color: #111827;
+    border-bottom-color: #2563eb; /* niebieski jak na screenie */
+}
+
+.product-description {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-description__toggle{
+    width: fit-content;
+}
+
+/* Zwinięty stan - max 200px */
+.product-description[data-collapsed="true"] .product-description__text {
+    max-height: 200px;
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.3s ease;
+}
+
+/* Gradient fade na dole */
+/* .product-description[data-collapsed="true"] .product-description__text::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, white);
+} */
+
+/* Rozwinięty stan */
+.product-description[data-collapsed="false"] .product-description__text {
+    max-height: none;
+    transition: max-height 0.3s ease;
+}
+
+.product-description__toggle {
+    margin-top: 16px;
+}
+
+/* Mobile - scroll poziomy */
+@media (max-width: 768px) {
+    .product-tabs-nav .container {
+        overflow-x: auto;
+        padding: 0 16px;
+        gap: 24px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    
+    .product-tabs-nav .container::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .tab-link {
+        font-size: 14px;
+    }
+}

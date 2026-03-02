@@ -1,0 +1,78 @@
+/* Sekcje zakładek */
+.product-tab-section {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.tab-section__header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.tab-section__header::after {
+    content: '';
+    flex-grow: 1;
+    height: 2px;
+    background: #e5e7eb;
+    margin-left: 24px;
+}
+
+.tab-section__header svg {
+    color: #f97316; /* pomarańczowy jak na screenie */
+    width: 40px;
+    height: 40px;
+}
+
+.tab-section__title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 16px 0 !important;
+}
+
+/* Kategorie specyfikacji */
+.spec-category {
+    margin-bottom: 48px;
+}
+
+.spec-category__title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* Tabela specyfikacji */
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.spec-table tbody tr:nth-child(odd) {
+    background: #F5F5F5; /* szary co drugi rząd */
+    border-color: #616161;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+}
+
+.spec-table td {
+    padding: 16px 24px;
+}
+
+.spec-table__label {
+    color: #6b7280;
+    font-weight: 400;
+    width: 50%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}
+
+.spec-table__value {
+    color: #111827;
+    font-weight: 600;
+    text-align: left;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+}

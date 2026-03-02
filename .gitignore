@@ -1,28 +1,76 @@
-# WordPress core (nie wersjonujemy)
-wp-admin/
-wp-includes/
-*.php
-!index.php
-!wp-*.php
+# === Bedrock .gitignore ===
 
-# Sekrety
-wp-config.php
+# Composer
+/vendor/
+composer.lock
 
-# Uploady (opcjonalnie - polecam wykluczyć)
-wp-content/uploads/
+# WordPress core (managed by Composer)
+/public/wp/
 
-# Cache i śmieci
-wp-content/cache/
-wp-content/upgrade/
-wp-content/backup*/
-wp-content/updraft/
-wp-content/wflogs/
-wp-content/litespeed/
-wp-content/ai1wm-backups/
-*.log
+# Plugins (managed by Composer)
+/public/wp-content/plugins/*
+!/public/wp-content/plugins/index.php
 
-# IDE/OS
+# Themes managed by Composer (parent theme)
+/public/wp-content/themes/autozpro/
+
+# mu-plugins managed by Composer
+/public/wp-content/mu-plugins/*/
+
+# Uploads
+/public/wp-content/uploads/
+
+# Upgrade files
+/public/wp-content/upgrade/
+/public/wp-content/upgrade-temp-backup/
+
+# Cache
+/public/wp-content/cache/
+
+# Debug log
+/public/wp-content/debug.log
+
+# Environment
+.env
+
+# Auth (contains license keys)
+auth.json
+
+# PHP CLI config (local dev helper)
+php-cli.ini
+
+# Composer binary (download on server)
+composer.phar
+
+# SQL backups
+/sql/
+
+# Premium packages (committed separately or managed outside git)
+# Uncomment below to exclude premium packages from git:
+# /premium/
+
+# OS files
 .DS_Store
 Thumbs.db
+desktop.ini
+
+# IDE
 .idea/
 .vscode/
+*.swp
+*.swo
+
+# Local dev
+/public/local-*.php
+
+# Vite dev hot file
+/public/wp-content/themes/autozpro-child-test/dist/hot
+
+# Node modules
+node_modules/
+
+# Claude Code
+*.jsonl
+
+# Secondary WP installation (testing)
+/zahakowani/

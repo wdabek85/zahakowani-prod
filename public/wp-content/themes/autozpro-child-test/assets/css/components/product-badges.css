@@ -1,0 +1,38 @@
+.product-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 6px 8px;
+    border-radius: 0 0 6px 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    text-transform: capitalize;
+}
+
+/* Kolory dla poszczególnych badges */
+.badge--zestaw {
+    background: #ff6b35;
+}
+
+.badge--modul_13pin,
+.badge--modul_7pin {
+    background: #2563eb;
+}
+
+.badge--wiazka_13pin,
+.badge--wiazka_7pin {
+    background: #0891b2;
+}
+
+.badge--bestseller {
+    background: #10b981;
+}
+
+.badge--nowość {
+    background: #8b5cf6;
+}
