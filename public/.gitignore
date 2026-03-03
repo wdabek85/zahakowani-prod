@@ -5,8 +5,8 @@ wp-includes/
 !index.php
 !wp-*.php
 
-# Sekrety
-wp-config.php
+# wp-config.php is a Bedrock shim (no secrets) — MUST be in git
+!wp-config.php
 
 # Uploady (opcjonalnie - polecam wykluczyć)
 wp-content/uploads/
