@@ -1,0 +1,62 @@
+name: Deploy to production
+
+on:
+  push:
+    branches: [main]
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy to zahakowani.pl
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H wiktor1249.ssh.dhosting.pl >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Rsync files to server
+        run: |
+          rsync -avz --delete \
+            --exclude='.env' \
+            --exclude='auth.json' \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='vendor/' \
+            --exclude='node_modules/' \
+            --exclude='public/wp/' \
+            --exclude='public/wp-content/uploads/' \
+            --exclude='public/wp-content/cache/' \
+            --exclude='public/wp-content/debug.log' \
+            --exclude='sql/' \
+            --exclude='php-cli.ini' \
+            --exclude='composer.phar' \
+            --exclude='*.jsonl' \
+            --exclude='premium/themes/autozpro/inc/merlin/vendor/' \
+            --exclude='premium/plugins/inpost-pay/vendor/' \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            ./ wiktor1249@wiktor1249.ssh.dhosting.pl:~/zahakowani.pl/app/
+
+      - name: Install dependencies & flush cache
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
+            wiktor1249@wiktor1249.ssh.dhosting.pl \
+            "cd ~/zahakowani.pl/app && php82 ~/composer.phar install --no-dev --optimize-autoloader --no-interaction && php82 ~/wp-cli.phar --path=public/wp cache flush 2>/dev/null || true"
+
+      - name: Verify deployment
+        run: |
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://zahakowani.pl/)
+          echo "Site returned HTTP $HTTP_STATUS"
+          if [ "$HTTP_STATUS" != "200" ]; then
+            echo "::warning::Site returned HTTP $HTTP_STATUS instead of 200"
+          fi

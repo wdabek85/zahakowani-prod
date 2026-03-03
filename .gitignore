@@ -2,7 +2,6 @@
 
 # Composer
 /vendor/
-composer.lock
 
 # WordPress core (managed by Composer)
 /public/wp/
@@ -39,8 +38,9 @@ auth.json
 # PHP CLI config (local dev helper)
 php-cli.ini
 
-# Composer binary (download on server)
+# Binaries (download locally / on server)
 composer.phar
+wp-cli.phar
 
 # SQL backups
 /sql/

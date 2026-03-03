@@ -28,6 +28,7 @@ if (toggle && overlay && sidebar && sidebar.children.length > 0) {
     const content = document.createElement('div');
     content.className = 'mobile-filter-content';
     content.innerHTML = sidebar.innerHTML;
+    content.querySelectorAll('[data-vs-init]').forEach(el => el.removeAttribute('data-vs-init'));
     drawer.appendChild(content);
 
     document.body.appendChild(drawer);
