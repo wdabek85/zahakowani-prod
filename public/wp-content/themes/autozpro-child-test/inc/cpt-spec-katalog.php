@@ -52,6 +52,24 @@ add_action('acf/include_fields', function () {
         'title'  => 'Specyfikacja haka',
         'fields' => [
             [
+                'key'           => 'field_katalog_wariant',
+                'label'         => 'Wybierz wariant',
+                'name'          => 'katalog_wariant',
+                'type'          => 'checkbox',
+                'choices'       => [
+                    'zestaw'       => 'Zestaw',
+                    'modul_13pin'  => 'Moduł 13-Pin',
+                    'modul_7pin'   => 'Moduł 7-Pin',
+                    'wiazka_13pin' => 'Wiązka 13-Pin',
+                    'wiazka_7pin'  => 'Wiązka 7-Pin',
+                    'bestseller'   => 'Bestseller',
+                    'nowość'       => 'Nowość',
+                ],
+                'layout'        => 'horizontal',
+                'return_format' => 'value',
+                'instructions'  => 'Odznaki przypisywane automatycznie do produktów powiązanych z tym katalogiem.',
+            ],
+            [
                 'key'           => 'field_katalog_miniaturka',
                 'label'         => 'Miniaturka',
                 'name'          => 'katalog_miniaturka',
@@ -399,3 +417,60 @@ add_action('save_post_product', function ($post_id, $post) {
     ]);
     add_action('save_post_product', __FUNCTION__, 10, 2);
 }, 10, 2);
+
+/* ──────────────────────────────────────────────
+ * 8. Sync katalog_wariant → product_badges
+ *
+ * a) On catalog save: propagate badges to all linked products.
+ * b) On product save: inherit badges from linked catalog.
+ * ────────────────────────────────────────────── */
+
+// a) Catalog saved → update all linked products
+add_action('save_post_spec_katalog', function ($katalog_id) {
+    if (wp_is_post_revision($katalog_id) || wp_is_post_autosave($katalog_id)) {
+        return;
+    }
+
+    $warianty = get_field('katalog_wariant', $katalog_id);
+    if (! is_array($warianty)) {
+        $warianty = [];
+    }
+
+    $products = get_posts([
+        'post_type'      => 'product',
+        'posts_per_page' => -1,
+        'meta_key'       => 'numer_katalogowy',
+        'meta_value'     => $katalog_id,
+        'post_status'    => ['publish', 'draft', 'pending', 'private'],
+        'fields'         => 'ids',
+    ]);
+
+    foreach ($products as $product_id) {
+        update_field('product_badges', $warianty, $product_id);
+    }
+});
+
+// b) Product saved → inherit badges from catalog
+add_action('save_post_product', function ($post_id) {
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+        return;
+    }
+
+    $katalog_id = get_field('numer_katalogowy', $post_id);
+    if (empty($katalog_id)) {
+        return;
+    }
+
+    $warianty = get_field('katalog_wariant', $katalog_id);
+    if (! is_array($warianty)) {
+        $warianty = [];
+    }
+
+    // Only sync if product doesn't have manually set badges different from catalog
+    $current = get_field('product_badges', $post_id);
+    if ($current === $warianty) {
+        return;
+    }
+
+    update_field('product_badges', $warianty, $post_id);
+}, 20); // priority 20 = after description auto-fill (priority 10)
