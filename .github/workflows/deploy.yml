@@ -27,7 +27,7 @@ jobs:
 
       - name: Rsync files to server
         run: |
-          rsync -avz --delete \
+          rsync -avz \
             --exclude='.env' \
             --exclude='auth.json' \
             --exclude='.git/' \
@@ -35,12 +35,15 @@ jobs:
             --exclude='vendor/' \
             --exclude='node_modules/' \
             --exclude='public/wp/' \
+            --exclude='public/wp-content/plugins/' \
+            --exclude='public/wp-content/mu-plugins/' \
             --exclude='public/wp-content/uploads/' \
             --exclude='public/wp-content/cache/' \
             --exclude='public/wp-content/debug.log' \
             --exclude='sql/' \
             --exclude='php-cli.ini' \
             --exclude='composer.phar' \
+            --exclude='wp-cli.phar' \
             --exclude='*.jsonl' \
             --exclude='premium/themes/autozpro/inc/merlin/vendor/' \
             --exclude='premium/plugins/inpost-pay/vendor/' \

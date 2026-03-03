@@ -77,7 +77,7 @@ success "Preflight passed"
 
 log "Syncing files to production"
 
-rsync -avz --delete $DRY_RUN \
+rsync -avz $DRY_RUN \
     --exclude='.env' \
     --exclude='auth.json' \
     --exclude='.git/' \
@@ -85,12 +85,15 @@ rsync -avz --delete $DRY_RUN \
     --exclude='vendor/' \
     --exclude='node_modules/' \
     --exclude='public/wp/' \
+    --exclude='public/wp-content/plugins/' \
+    --exclude='public/wp-content/mu-plugins/' \
     --exclude='public/wp-content/uploads/' \
     --exclude='public/wp-content/cache/' \
     --exclude='public/wp-content/debug.log' \
     --exclude='sql/' \
     --exclude='php-cli.ini' \
     --exclude='composer.phar' \
+    --exclude='wp-cli.phar' \
     --exclude='*.jsonl' \
     --exclude='.DS_Store' \
     --exclude='Thumbs.db' \
