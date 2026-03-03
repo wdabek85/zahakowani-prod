@@ -1,0 +1,401 @@
+<?php
+/**
+ * CPT: Katalog haków (spec_katalog)
+ *
+ * Each post = one catalog number (e.g. W/007) with a spec repeater.
+ * Products link to a catalog entry via Post Object field.
+ */
+
+defined('ABSPATH') || exit;
+
+/* ──────────────────────────────────────────────
+ * 1. Register CPT — hidden, under WooCommerce menu
+ * ────────────────────────────────────────────── */
+
+add_action('init', function () {
+    register_post_type('spec_katalog', [
+        'labels' => [
+            'name'               => 'Katalog haków',
+            'singular_name'      => 'Wpis katalogowy',
+            'add_new'            => 'Dodaj wpis',
+            'add_new_item'       => 'Dodaj wpis katalogowy',
+            'edit_item'          => 'Edytuj wpis katalogowy',
+            'new_item'           => 'Nowy wpis katalogowy',
+            'view_item'          => 'Zobacz wpis',
+            'search_items'       => 'Szukaj w katalogu',
+            'not_found'          => 'Nie znaleziono wpisów',
+            'not_found_in_trash' => 'Brak w koszu',
+            'all_items'          => 'Katalog haków',
+        ],
+        'public'       => false,
+        'show_ui'      => true,
+        'show_in_menu' => 'woocommerce',
+        'supports'     => ['title', 'editor'],
+        'capability_type' => 'product',
+        'map_meta_cap'    => true,
+    ]);
+});
+
+/* ──────────────────────────────────────────────
+ * 2. ACF fields — repeater on catalog posts
+ *    + Post Object on products
+ * ────────────────────────────────────────────── */
+
+add_action('acf/include_fields', function () {
+    if (! function_exists('acf_add_local_field_group')) {
+        return;
+    }
+
+    // A) Spec repeater + gallery on catalog entries
+    acf_add_local_field_group([
+        'key'    => 'group_spec_katalog',
+        'title'  => 'Specyfikacja haka',
+        'fields' => [
+            [
+                'key'           => 'field_katalog_miniaturka',
+                'label'         => 'Miniaturka',
+                'name'          => 'katalog_miniaturka',
+                'type'          => 'image',
+                'return_format' => 'id',
+                'preview_size'  => 'medium',
+                'library'       => 'all',
+                'instructions'  => 'Główne zdjęcie produktu. Dziedziczone gdy produkt nie ma własnej miniaturki.',
+            ],
+            [
+                'key'          => 'field_katalog_galeria',
+                'label'        => 'Galeria zdjęć',
+                'name'         => 'katalog_galeria',
+                'type'         => 'gallery',
+                'return_format' => 'id',
+                'library'      => 'all',
+                'insert'       => 'append',
+                'preview_size' => 'medium',
+                'instructions' => 'Dodatkowe zdjęcia. Dziedziczone gdy produkt nie ma własnej galerii.',
+            ],
+            [
+                'key'          => 'field_katalog_certyfikaty',
+                'label'        => 'Certyfikaty',
+                'name'         => 'katalog_certyfikaty',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Dodaj certyfikat',
+                'sub_fields'   => [
+                    [
+                        'key'     => 'field_katalog_cert_tytul',
+                        'label'   => 'Tytuł',
+                        'name'    => 'tytul',
+                        'type'    => 'text',
+                    ],
+                    [
+                        'key'     => 'field_katalog_cert_typ',
+                        'label'   => 'Typ certyfikatu',
+                        'name'    => 'typ_certyfikatu',
+                        'type'    => 'select',
+                        'choices' => [
+                            'e20_hak'   => 'E20 Hak',
+                            'e20_modul' => 'E20 Moduł',
+                            'pja'       => 'PJA',
+                        ],
+                    ],
+                    [
+                        'key'           => 'field_katalog_cert_pdf',
+                        'label'         => 'Plik PDF',
+                        'name'          => 'plik_pdf',
+                        'type'          => 'file',
+                        'return_format' => 'array',
+                        'mime_types'    => 'pdf',
+                    ],
+                    [
+                        'key'   => 'field_katalog_cert_link',
+                        'label' => 'Link info',
+                        'name'  => 'link_info',
+                        'type'  => 'url',
+                    ],
+                ],
+            ],
+            [
+                'key'          => 'field_katalog_parametry',
+                'label'        => 'Parametry',
+                'name'         => 'katalog_parametry',
+                'type'         => 'repeater',
+                'layout'       => 'table',
+                'button_label' => 'Dodaj parametr',
+                'sub_fields'   => [
+                    [
+                        'key'   => 'field_katalog_param_nazwa',
+                        'label' => 'Nazwa parametru',
+                        'name'  => 'nazwa_parametru',
+                        'type'  => 'text',
+                    ],
+                    [
+                        'key'   => 'field_katalog_param_wartosc',
+                        'label' => 'Wartość parametru',
+                        'name'  => 'wartosc_parametru',
+                        'type'  => 'text',
+                    ],
+                ],
+            ],
+        ],
+        'location' => [
+            [
+                [
+                    'param'    => 'post_type',
+                    'operator' => '==',
+                    'value'    => 'spec_katalog',
+                ],
+            ],
+        ],
+    ]);
+
+    // B) Post Object field on products — pick catalog entry
+    acf_add_local_field_group([
+        'key'    => 'group_product_katalog',
+        'title'  => 'Numer katalogowy haka',
+        'fields' => [
+            [
+                'key'           => 'field_product_numer_katalogowy',
+                'label'         => 'Numer katalogowy',
+                'name'          => 'numer_katalogowy',
+                'type'          => 'post_object',
+                'post_type'     => ['spec_katalog'],
+                'return_format' => 'id',
+                'allow_null'    => 1,
+                'ui'            => 1,
+                'instructions'  => 'Wybierz numer katalogowy haka — specyfikacja pobierze się automatycznie.',
+            ],
+        ],
+        'location' => [
+            [
+                [
+                    'param'    => 'post_type',
+                    'operator' => '==',
+                    'value'    => 'product',
+                ],
+            ],
+        ],
+        'position' => 'side',
+    ]);
+});
+
+/* ──────────────────────────────────────────────
+ * 3. get_catalog_specifications()
+ *
+ * Returns spec data from the linked catalog entry.
+ * Output matches specyfikacja_rozszerzona structure.
+ * ────────────────────────────────────────────── */
+
+function get_catalog_specifications($product_id = null) {
+    if (! $product_id) {
+        $product_id = get_the_ID();
+    }
+
+    $katalog_id = get_field('numer_katalogowy', $product_id);
+
+    if (empty($katalog_id)) {
+        return [];
+    }
+
+    $params = get_field('katalog_parametry', $katalog_id);
+
+    if (empty($params)) {
+        return [];
+    }
+
+    return [
+        [
+            'nazwa_produktu' => 'Dane techniczne haka holowniczego',
+            'parametry'      => $params,
+        ],
+    ];
+}
+
+/* ──────────────────────────────────────────────
+ * 4. get_catalog_certyfikaty()
+ *
+ * Returns certificates from the linked catalog entry.
+ * Same structure as the product `certyfikaty` repeater.
+ * ────────────────────────────────────────────── */
+
+function get_catalog_certyfikaty($product_id = null) {
+    if (! $product_id) {
+        $product_id = get_the_ID();
+    }
+
+    $katalog_id = get_field('numer_katalogowy', $product_id);
+
+    if (empty($katalog_id)) {
+        return [];
+    }
+
+    $certs = get_field('katalog_certyfikaty', $katalog_id);
+
+    return ! empty($certs) ? $certs : [];
+}
+
+/* ──────────────────────────────────────────────
+ * 5. WC filters — inherit thumbnail & gallery
+ *    from catalog when product has none of its own.
+ *    Works everywhere: product page, archives, cart.
+ * ────────────────────────────────────────────── */
+
+add_filter('woocommerce_product_get_image_id', function ($image_id, $product) {
+    if ($image_id) {
+        return $image_id;
+    }
+
+    $katalog_id = get_field('numer_katalogowy', $product->get_id());
+    if (empty($katalog_id)) {
+        return $image_id;
+    }
+
+    return get_field('katalog_miniaturka', $katalog_id) ?: $image_id;
+}, 10, 2);
+
+add_filter('woocommerce_product_get_gallery_image_ids', function ($ids, $product) {
+    if (! empty($ids)) {
+        return $ids;
+    }
+
+    $katalog_id = get_field('numer_katalogowy', $product->get_id());
+    if (empty($katalog_id)) {
+        return $ids;
+    }
+
+    $gallery = get_field('katalog_galeria', $katalog_id);
+
+    return ! empty($gallery) ? $gallery : $ids;
+}, 10, 2);
+
+/* ──────────────────────────────────────────────
+ * 5. Admin metabox — preview inherited media
+ *    on the product edit screen.
+ * ────────────────────────────────────────────── */
+
+add_action('add_meta_boxes', function () {
+    add_meta_box(
+        'katalog_media_preview',
+        'Zdjęcia z katalogu',
+        'render_katalog_media_preview',
+        'product',
+        'side',
+        'low'
+    );
+
+    add_meta_box(
+        'katalog_linked_products',
+        'Powiązane oferty',
+        'render_katalog_linked_products',
+        'spec_katalog',
+        'side',
+        'default'
+    );
+});
+
+function render_katalog_media_preview($post) {
+    $katalog_id = get_field('numer_katalogowy', $post->ID);
+
+    if (empty($katalog_id)) {
+        echo '<p style="color:#888">Wybierz numer katalogowy, aby dziedziczyć zdjęcia.</p>';
+        return;
+    }
+
+    $katalog_title = get_the_title($katalog_id);
+    $miniaturka_id = get_field('katalog_miniaturka', $katalog_id);
+    $galeria_ids   = get_field('katalog_galeria', $katalog_id);
+    $has_own_thumb  = has_post_thumbnail($post->ID);
+    $wc_product     = wc_get_product($post->ID);
+    $has_own_gallery = $wc_product && ! empty($wc_product->get_gallery_image_ids());
+
+    $edit_url = get_edit_post_link($katalog_id);
+
+    echo '<p style="margin-bottom:8px">Katalog: <a href="' . esc_url($edit_url) . '"><strong>' . esc_html($katalog_title) . '</strong></a></p>';
+
+    // Thumbnail preview
+    if ($miniaturka_id) {
+        $status = $has_own_thumb ? ' <span style="color:#888">(nadpisana)</span>' : ' <span style="color:#2271b1">(aktywna)</span>';
+        echo '<p style="margin:4px 0 2px"><strong>Miniaturka</strong>' . $status . '</p>';
+        echo '<div style="margin-bottom:8px">' . wp_get_attachment_image($miniaturka_id, [80, 80], false, ['style' => 'border-radius:4px']) . '</div>';
+    }
+
+    // Gallery preview
+    if (! empty($galeria_ids)) {
+        $status = $has_own_gallery ? ' <span style="color:#888">(nadpisana)</span>' : ' <span style="color:#2271b1">(aktywna)</span>';
+        echo '<p style="margin:4px 0 2px"><strong>Galeria</strong>' . $status . '</p>';
+        echo '<div style="display:flex;flex-wrap:wrap;gap:4px">';
+        foreach ($galeria_ids as $img_id) {
+            echo wp_get_attachment_image($img_id, [50, 50], false, ['style' => 'border-radius:3px']);
+        }
+        echo '</div>';
+    }
+
+    if (empty($miniaturka_id) && empty($galeria_ids)) {
+        echo '<p style="color:#888">Katalog nie ma jeszcze zdjęć. <a href="' . esc_url($edit_url) . '">Dodaj</a></p>';
+    }
+}
+
+function render_katalog_linked_products($post) {
+    $products = get_posts([
+        'post_type'      => 'product',
+        'posts_per_page' => -1,
+        'meta_key'       => 'numer_katalogowy',
+        'meta_value'     => $post->ID,
+        'post_status'    => ['publish', 'draft', 'pending', 'private'],
+    ]);
+
+    $count = count($products);
+
+    echo '<p style="margin-bottom:8px"><strong>' . $count . '</strong> ' . _n('oferta', 'ofert', $count) . '</p>';
+
+    if (empty($products)) {
+        echo '<p style="color:#888">Brak produktów powiązanych z tym katalogiem.</p>';
+        return;
+    }
+
+    echo '<ul style="margin:0;padding:0;list-style:none">';
+    foreach ($products as $product) {
+        $edit_url = get_edit_post_link($product->ID);
+        $status   = get_post_status($product->ID);
+        $badge    = $status !== 'publish' ? ' <span style="color:#888">(' . $status . ')</span>' : '';
+        echo '<li style="padding:4px 0;border-bottom:1px solid #f0f0f0">';
+        echo '<a href="' . esc_url($edit_url) . '">' . esc_html($product->post_title) . '</a>' . $badge;
+        echo '</li>';
+    }
+    echo '</ul>';
+}
+
+/* ──────────────────────────────────────────────
+ * 7. Auto-fill product description from catalog.
+ *
+ * On product save: if the description is empty and
+ * a catalog is linked, copy the catalog's description
+ * into the product. User can then edit freely.
+ * ────────────────────────────────────────────── */
+
+add_action('save_post_product', function ($post_id, $post) {
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+        return;
+    }
+
+    // Only seed when description is empty.
+    if (! empty(trim($post->post_content))) {
+        return;
+    }
+
+    $katalog_id = get_field('numer_katalogowy', $post_id);
+    if (empty($katalog_id)) {
+        return;
+    }
+
+    $katalog_opis = get_post_field('post_content', $katalog_id);
+    if (empty($katalog_opis)) {
+        return;
+    }
+
+    // Unhook to prevent recursion, update, rehook.
+    remove_action('save_post_product', __FUNCTION__);
+    wp_update_post([
+        'ID'           => $post_id,
+        'post_content' => $katalog_opis,
+    ]);
+    add_action('save_post_product', __FUNCTION__, 10, 2);
+}, 10, 2);

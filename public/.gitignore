@@ -1,17 +1,10 @@
-# WordPress core (nie wersjonujemy)
-wp-admin/
-wp-includes/
-*.php
-!index.php
-!wp-*.php
+# WP core is already excluded by root .gitignore (/public/wp/)
+# This file only handles wp-content exclusions
 
-# wp-config.php is a Bedrock shim (no secrets) — MUST be in git
-!wp-config.php
-
-# Uploady (opcjonalnie - polecam wykluczyć)
+# Uploads (media files — too large for git, live only on server)
 wp-content/uploads/
 
-# Cache i śmieci
+# Cache and temp
 wp-content/cache/
 wp-content/upgrade/
 wp-content/backup*/
