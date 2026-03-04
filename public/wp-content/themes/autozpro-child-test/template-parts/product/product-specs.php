@@ -13,7 +13,7 @@ $parametry = [
     'homologacja_haka'          => 'Homologacja haka',
     'gwarancja'                 => 'Gwarancja',
     'kula_haka'                 => 'Kula Haka',
-    'pasuje_do_aut'             => 'Pasuje do aut',
+    'pasuje_do_aut:'            => 'Pasuje do aut',
 ];
 ?>
 
