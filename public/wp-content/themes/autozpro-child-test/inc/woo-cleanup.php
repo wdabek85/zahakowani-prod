@@ -18,3 +18,9 @@ add_filter('loop_shop_columns', function() {
 add_filter('loop_shop_per_page', function() {
     return 12;
 });
+
+// Wyłącz sticky add-to-cart z parent theme (mamy własny sticky-buy-bar.php)
+// Bez tego parent theme woła $product->is_purchasable() bez sprawdzenia typu — fatal na Coming Soon
+add_action('after_setup_theme', function () {
+    remove_action('autozpro_after_footer', 'autozpro_sticky_single_add_to_cart', 999);
+});
