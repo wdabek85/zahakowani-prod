@@ -10,7 +10,7 @@ function get_product_variants($product_id = null) {
 
     // Aktualny wariant
     $current = get_field('wariant', $product_id);
-    $current = (!empty($current) && $current !== 'Brak') ? (string) $current : null;
+    $current = !empty($current) ? (string) $current : null;
 
     // Powiązane produkty (relacja)
     $rel = get_field('wielowariantowosc', $product_id);
@@ -40,7 +40,7 @@ function get_product_variants($product_id = null) {
         if (empty($url)) continue;
 
         $label = get_field('wariant', $id);
-        $label = (!empty($label) && $label !== 'Brak') ? (string) $label : get_the_title($id);
+        $label = !empty($label) ? (string) $label : get_the_title($id);
 
         $related[] = [
             'id'    => $id,
