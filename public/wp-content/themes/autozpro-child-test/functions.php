@@ -9,6 +9,17 @@ require_once get_stylesheet_directory() . '/inc/helpers/icons.php';
 require_once get_stylesheet_directory() . '/inc/helpers/delivery-message.php';
 require_once get_stylesheet_directory() . '/inc/widgets/vehicle-search-widget.php';
 require_once get_stylesheet_directory() . '/inc/attributes.php';
+
+/**
+ * Usuń pole "part" z kaskady wyszukiwarki pojazdów.
+ * Child theme używa 3 pól (rok → marka → model), nie 4.
+ * Dzięki temu get_options() zwraca URL-e filtrujące po wybraniu modelu.
+ */
+add_filter('autozpro_admin_fields_filter_vehicle', function ($fields) {
+    return array_values(array_filter($fields, function ($f) {
+        return $f['slug'] !== 'part';
+    }));
+});
 require_once get_stylesheet_directory() . '/inc/cpt-guide.php';
 require_once get_stylesheet_directory() . '/inc/acf-spec-templates.php';
 require_once get_stylesheet_directory() . '/inc/cpt-spec-katalog.php';
