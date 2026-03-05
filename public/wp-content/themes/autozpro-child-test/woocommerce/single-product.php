@@ -42,6 +42,9 @@ the_post();
 
                     // Warianty ACF - Zadanie 4
                     get_template_part('template-parts/product/product-variants');
+
+                    // CTA porównanie wariantów
+                    get_template_part('template-parts/product/variant-compare-cta');
                     ?>
                 </div>
             </div>
@@ -97,6 +100,8 @@ the_post();
     get_template_part('template-parts/product/tabs/opinie');
     ?>
 </div>
+
+<?php get_template_part('template-parts/product/variant-comparison'); ?>
 
 <?php
 get_template_part('template-parts/product/product-section-trust-stats');

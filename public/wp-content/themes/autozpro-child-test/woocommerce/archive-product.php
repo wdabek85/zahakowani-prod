@@ -90,6 +90,31 @@ get_header('shop');
         }
         ?>
 
+        <?php
+        // Tabela porównawcza wariantów — tylko dla kategorii potomnych "Kompletne haki holownicze"
+        if (is_product_category()) {
+            $current_term = get_queried_object();
+            $show_comparison = false;
+
+            if ($current_term && ! is_wp_error($current_term)) {
+                // Znajdź kategorię "Kompletne haki holownicze" po slug
+                $parent_cat = get_term_by('slug', 'kompletne-haki-holownicze', 'product_cat');
+                if ($parent_cat) {
+                    // Pokaż na samej kategorii lub jej potomnych
+                    if ($current_term->term_id === $parent_cat->term_id
+                        || term_is_ancestor_of($parent_cat->term_id, $current_term->term_id, 'product_cat')
+                    ) {
+                        $show_comparison = true;
+                    }
+                }
+            }
+
+            if ($show_comparison) {
+                get_template_part('template-parts/product/variant-comparison');
+            }
+        }
+        ?>
+
     <?php else : ?>
         <?php do_action('woocommerce_no_products_found'); ?>
     <?php endif; ?>

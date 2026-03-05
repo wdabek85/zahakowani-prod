@@ -1,0 +1,272 @@
+/* ===================================
+   VARIANT COMPARISON TABLE
+   Tabela porównawcza wiązka/moduł 7/13-pin
+   Mobile-first
+   =================================== */
+
+/* --- Section (break out of .col-full to full viewport width) --- */
+.vc-section {
+    padding: 48px 0;
+    background: #fff;
+    border-top: 1px solid var(--color-border, #e5e7eb);
+    border-bottom: 1px solid var(--color-border, #e5e7eb);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+}
+
+.vc-section__title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--color-secondary, #111827);
+    margin: 0 0 8px;
+    text-align: center;
+}
+
+.vc-section__subtitle {
+    font-size: 14px;
+    color: var(--color-text-muted, #6b7280);
+    text-align: center;
+    margin: 0 0 32px;
+}
+
+/* --- Table wrapper (horizontal scroll on mobile) --- */
+.vc-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--color-border, #e5e7eb);
+    border-radius: 12px;
+}
+
+/* --- Table --- */
+.vc-table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Corner cell */
+.vc-table__corner {
+    background: #f9fafb;
+    min-width: 160px;
+}
+
+/* Column headers */
+.vc-table__col-header {
+    padding: 16px 12px;
+    text-align: center;
+    vertical-align: bottom;
+    border-bottom: 2px solid var(--color-border, #e5e7eb);
+    border-left: 1px solid var(--color-border, #e5e7eb);
+}
+
+.vc-table__col-header--wiazka {
+    background: #eff6ff;
+}
+
+.vc-table__col-header--modul {
+    background: #fffbeb;
+}
+
+.vc-table__col-name {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 4px;
+}
+
+.vc-table__col-header--wiazka .vc-table__col-name {
+    color: var(--color-primary-main, #193CB8);
+}
+
+.vc-table__col-header--modul .vc-table__col-name {
+    color: #d97706;
+}
+
+.vc-table__col-sub {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--color-text-muted, #6b7280);
+}
+
+/* Row label */
+.vc-table__label {
+    padding: 12px 16px;
+    font-weight: 600;
+    color: var(--color-secondary, #111827);
+    background: #fff;
+    border-bottom: 1px solid var(--color-border, #e5e7eb);
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+/* Data cell */
+.vc-table__cell {
+    padding: 12px 16px;
+    text-align: center;
+    color: var(--color-secondary, #111827);
+    border-bottom: 1px solid var(--color-border, #e5e7eb);
+    border-left: 1px solid var(--color-border, #e5e7eb);
+    overflow-wrap: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+/* Alternating row backgrounds */
+.vc-table__row--even .vc-table__label,
+.vc-table__row--even .vc-table__cell {
+    background: #f9fafb;
+}
+
+/* Last row — no bottom border (wrapper border closes the table) */
+.vc-table tbody tr:last-child .vc-table__label,
+.vc-table tbody tr:last-child .vc-table__cell {
+    border-bottom: none;
+}
+
+/* --- Popular column highlight --- */
+.vc-table__col--popular {
+    background: #ecfdf5 !important;
+    border-left: 2px solid #10b981;
+    border-right: 2px solid #10b981;
+}
+
+th.vc-table__col--popular {
+    border-top: 2px solid #10b981;
+    border-radius: 10px 10px 0 0;
+}
+
+.vc-table tbody tr:last-child td.vc-table__col--popular {
+    border-bottom: 2px solid #10b981;
+    border-radius: 0 0 10px 10px;
+}
+
+.vc-popular-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: #10b981;
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 6px;
+}
+
+/* Yes / No badges */
+.vc-yes {
+    color: #10b981;
+    font-weight: 600;
+}
+
+.vc-no {
+    color: #9ca3af;
+    font-weight: 500;
+}
+
+/* ===================================
+   CTA "Nie wiesz co wybrać?"
+   Inline banner under variant chips
+   =================================== */
+.vc-cta {
+    margin-top: 12px;
+}
+
+.vc-cta__inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #f0f4ff;
+    border: 1px solid #dbe4ff;
+    border-radius: 8px;
+}
+
+.vc-cta__icon {
+    flex-shrink: 0;
+    color: var(--color-primary-main, #193CB8);
+}
+
+.vc-cta__text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-secondary, #111827);
+}
+
+.vc-cta__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-primary-main, #193CB8);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.vc-cta__link:hover {
+    text-decoration: underline;
+}
+
+.vc-cta__link svg {
+    flex-shrink: 0;
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+@media (max-width: 768px) {
+    .vc-section {
+        padding: 32px 0;
+    }
+
+    .vc-section__title {
+        font-size: 18px;
+        padding: 0 16px;
+    }
+
+    .vc-section__subtitle {
+        padding: 0 16px;
+    }
+
+    /* Wider columns on mobile for better readability */
+    .vc-table {
+        min-width: 1100px;
+    }
+
+    .vc-table__col-header {
+        min-width: 220px;
+        padding: 14px 16px;
+    }
+
+    .vc-table__cell {
+        min-width: 220px;
+    }
+
+    .vc-table-wrap {
+        margin: 0 -16px;
+        border-radius: 0;
+    }
+
+    .vc-cta__inner {
+        flex-wrap: wrap;
+    }
+
+    .vc-cta__link {
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+        padding: 8px 0 0;
+    }
+}

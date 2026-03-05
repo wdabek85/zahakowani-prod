@@ -23,6 +23,7 @@ add_filter('autozpro_admin_fields_filter_vehicle', function ($fields) {
 require_once get_stylesheet_directory() . '/inc/cpt-guide.php';
 require_once get_stylesheet_directory() . '/inc/acf-spec-templates.php';
 require_once get_stylesheet_directory() . '/inc/cpt-spec-katalog.php';
+require_once get_stylesheet_directory() . '/inc/acf-variant-comparison.php';
 
 /**
  * Breadcrumbs on blog posts and guides.

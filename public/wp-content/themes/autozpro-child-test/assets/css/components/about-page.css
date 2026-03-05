@@ -1,0 +1,689 @@
+/**
+ * About page ("O nas") — #zah-onas scoped styles.
+ *
+ * @package autozpro-child-test
+ */
+
+/* -- GOOGLE FONTS -- */
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* -- RESET SCOPED -- */
+#zah-onas *,
+#zah-onas *::before,
+#zah-onas *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#zah-onas {
+  font-family: 'Lora', Georgia, serif;
+  overflow-x: hidden;
+  line-height: 1.7;
+  color: #f5f0e8;
+}
+
+/* -- HERO -- */
+#zah-onas .zah-hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+}
+
+#zah-onas .zah-hero-left {
+  background: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 80px 64px;
+  position: relative;
+  z-index: 2;
+}
+
+#zah-onas .zah-hero-left::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -60px;
+  bottom: 0;
+  width: 120px;
+  background: #1a1a1a;
+  clip-path: polygon(0 0, 50% 0, 100% 100%, 0 100%);
+  z-index: 3;
+}
+
+#zah-onas .zah-hero-right {
+  background: #e8601c;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#zah-onas .zah-hero-right::before {
+  content: '12';
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(200px, 30vw, 400px);
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.12);
+  position: absolute;
+  line-height: 1;
+  right: -20px;
+  bottom: -20px;
+  letter-spacing: -10px;
+}
+
+#zah-onas .zah-hero-right-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 40px;
+  animation: zahFadeUp 0.8s 0.5s ease both;
+}
+
+#zah-onas .zah-years-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 12px;
+}
+
+#zah-onas .zah-years-number {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(100px, 14vw, 180px);
+  font-weight: 800;
+  color: #0d0d0d;
+  line-height: 0.85;
+  letter-spacing: -4px;
+  display: block;
+}
+
+#zah-onas .zah-years-suffix {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: rgba(0, 0, 0, 0.7);
+  margin-top: 8px;
+  display: block;
+}
+
+#zah-onas .zah-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #e8601c;
+  margin-bottom: 24px;
+  animation: zahFadeUp 0.7s 0.1s ease both;
+}
+
+#zah-onas .zah-hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(48px, 5.5vw, 80px);
+  font-weight: 800;
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  color: #fafaf7;
+  margin-bottom: 28px;
+  animation: zahFadeUp 0.7s 0.3s ease both;
+}
+
+#zah-onas .zah-hero-title em {
+  font-style: normal;
+  color: #e8601c;
+}
+
+#zah-onas .zah-hero-desc {
+  font-size: clamp(15px, 1.2vw, 17px);
+  color: #888880;
+  max-width: 380px;
+  line-height: 1.8;
+  margin-bottom: 48px;
+  animation: zahFadeUp 0.7s 0.45s ease both;
+}
+
+#zah-onas .zah-hero-line {
+  width: 60px;
+  height: 3px;
+  background: #e8601c;
+  margin-bottom: 32px;
+  animation: zahFadeUp 0.7s 0.2s ease both;
+}
+
+/* -- STATS BAR -- */
+#zah-onas .zah-stats-bar {
+  background: #e8601c;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#zah-onas .zah-stat-item {
+  padding: 40px 32px;
+  border-right: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+#zah-onas .zah-stat-item:last-child {
+  border-right: none;
+}
+
+#zah-onas .zah-stat-number {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(40px, 4vw, 60px);
+  font-weight: 800;
+  color: #0d0d0d;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+#zah-onas .zah-stat-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 8px;
+}
+
+/* -- STORY -- */
+#zah-onas .zah-story {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+}
+
+#zah-onas .zah-story-visual {
+  background: #2c2c2c;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#zah-onas .zah-story-visual-inner {
+  padding: 80px;
+  position: relative;
+  z-index: 2;
+}
+
+#zah-onas .zah-pull-quote {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.05;
+  color: #fafaf7;
+  quotes: none;
+}
+
+#zah-onas .zah-pull-quote em {
+  font-style: italic;
+  font-family: 'Lora', serif;
+  font-weight: 400;
+  color: #e8601c;
+  font-size: 0.85em;
+  text-transform: none;
+}
+
+#zah-onas .zah-pull-quote-attr {
+  margin-top: 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #888880;
+}
+
+#zah-onas .zah-diagonal-stripe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 80px;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 8px,
+    rgba(232, 96, 28, 0.15) 8px,
+    rgba(232, 96, 28, 0.15) 16px
+  );
+}
+
+#zah-onas .zah-story-content {
+  background: #1a1a1a;
+  padding: 80px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#zah-onas .zah-section-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: #e8601c;
+  margin-bottom: 20px;
+}
+
+#zah-onas .zah-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(32px, 3.5vw, 50px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  color: #fafaf7;
+  margin-bottom: 28px;
+}
+
+#zah-onas .zah-body-text {
+  font-size: 16px;
+  color: #888880;
+  line-height: 1.85;
+  margin-bottom: 0;
+}
+
+#zah-onas .zah-body-text + .zah-body-text {
+  margin-top: 18px;
+}
+
+/* -- VALUES -- */
+#zah-onas .zah-values {
+  background: #0d0d0d;
+  padding: 120px 64px;
+}
+
+#zah-onas .zah-values-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  margin-bottom: 80px;
+  align-items: end;
+}
+
+#zah-onas .zah-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: #2c2c2c;
+}
+
+#zah-onas .zah-value-card {
+  background: #1a1a1a;
+  padding: 48px 40px;
+  transition: background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+
+#zah-onas .zah-value-card:hover {
+  background: #2c2c2c;
+}
+
+#zah-onas .zah-value-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #e8601c;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+#zah-onas .zah-value-card:hover::before {
+  transform: scaleX(1);
+}
+
+#zah-onas .zah-value-icon {
+  font-size: 32px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+#zah-onas .zah-value-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fafaf7;
+  margin-bottom: 12px;
+}
+
+#zah-onas .zah-value-desc {
+  font-size: 14px;
+  color: #888880;
+  line-height: 1.75;
+}
+
+/* -- FOUNDER -- */
+#zah-onas .zah-founder {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #e8601c;
+  min-height: 50vh;
+}
+
+#zah-onas .zah-founder-text {
+  padding: 80px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#zah-onas .zah-founder-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 16px;
+}
+
+#zah-onas .zah-founder-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(42px, 5vw, 68px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -1px;
+  color: #0d0d0d;
+  margin-bottom: 24px;
+}
+
+#zah-onas .zah-founder-bio {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.8;
+  max-width: 440px;
+}
+
+#zah-onas .zah-founder-visual {
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+}
+
+#zah-onas .zah-founder-placeholder {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 120px;
+  font-weight: 800;
+  color: rgba(0, 0, 0, 0.2);
+  letter-spacing: -4px;
+}
+
+#zah-onas .zah-founder-visual-label {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* -- WHY US -- */
+#zah-onas .zah-why {
+  background: #1a1a1a;
+  padding: 120px 64px;
+}
+
+#zah-onas .zah-why-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+#zah-onas .zah-why-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 72px;
+}
+
+#zah-onas .zah-why-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  background: #2c2c2c;
+}
+
+#zah-onas .zah-why-item {
+  background: #1a1a1a;
+  padding: 40px 48px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+#zah-onas .zah-why-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: #e8601c;
+  opacity: 0.35;
+  line-height: 1;
+  flex-shrink: 0;
+  letter-spacing: -2px;
+}
+
+#zah-onas .zah-why-content h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fafaf7;
+  margin-bottom: 8px;
+}
+
+#zah-onas .zah-why-content p {
+  font-size: 14px;
+  color: #888880;
+  line-height: 1.75;
+}
+
+/* -- CTA -- */
+#zah-onas .zah-cta-section {
+  background: #0d0d0d;
+  padding: 120px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#zah-onas .zah-cta-section::before {
+  content: 'ZAHAKOWANI';
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(80px, 12vw, 180px);
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.03);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  letter-spacing: -4px;
+  pointer-events: none;
+}
+
+#zah-onas .zah-cta-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#zah-onas .zah-cta-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #fafaf7;
+  margin-bottom: 24px;
+}
+
+#zah-onas .zah-cta-title em {
+  font-style: normal;
+  color: #e8601c;
+}
+
+#zah-onas .zah-cta-text {
+  font-size: 16px;
+  color: #888880;
+  margin-bottom: 48px;
+  line-height: 1.8;
+}
+
+#zah-onas .zah-cta-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#zah-onas .zah-btn-primary {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: #e8601c;
+  color: #0d0d0d !important;
+  padding: 16px 40px;
+  text-decoration: none !important;
+  transition: background 0.2s;
+  display: inline-block;
+}
+
+#zah-onas .zah-btn-primary:hover {
+  background: #f07832;
+}
+
+#zah-onas .zah-btn-outline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  background: transparent;
+  color: #fafaf7 !important;
+  padding: 16px 40px;
+  text-decoration: none !important;
+  border: 2px solid #2c2c2c;
+  transition: border-color 0.2s;
+  display: inline-block;
+}
+
+#zah-onas .zah-btn-outline:hover {
+  border-color: #fafaf7;
+}
+
+/* -- ANIMATIONS -- */
+@keyframes zahFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -- RESPONSIVE -- */
+@media (max-width: 900px) {
+  #zah-onas .zah-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  #zah-onas .zah-hero-left {
+    padding: 60px 32px 60px;
+  }
+
+  #zah-onas .zah-hero-left::after {
+    display: none;
+  }
+
+  #zah-onas .zah-hero-right {
+    padding: 60px 32px;
+    min-height: 300px;
+  }
+
+  #zah-onas .zah-stats-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #zah-onas .zah-story {
+    grid-template-columns: 1fr;
+  }
+
+  #zah-onas .zah-story-content {
+    padding: 60px 32px;
+  }
+
+  #zah-onas .zah-story-visual-inner {
+    padding: 60px 32px;
+  }
+
+  #zah-onas .zah-values {
+    padding: 80px 24px;
+  }
+
+  #zah-onas .zah-values-header {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  #zah-onas .zah-values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #zah-onas .zah-founder {
+    grid-template-columns: 1fr;
+  }
+
+  #zah-onas .zah-founder-text {
+    padding: 60px 32px;
+  }
+
+  #zah-onas .zah-why {
+    padding: 80px 24px;
+  }
+
+  #zah-onas .zah-why-list {
+    grid-template-columns: 1fr;
+  }
+
+  #zah-onas .zah-why-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  #zah-onas .zah-cta-section {
+    padding: 80px 24px;
+  }
+}

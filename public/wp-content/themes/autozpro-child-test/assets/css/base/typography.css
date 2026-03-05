@@ -2,6 +2,18 @@
    TYPOGRAPHY TOKENS
 ============================== */
 
+/* Globalne łamanie słów — myślnik zamiast ucinania w połowie */
+body {
+  overflow-wrap: break-word;
+}
+
+td, th, p, li, span, a, label, dd, dt, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
 :root {
 
   /* ===== DISPLAY ===== */
