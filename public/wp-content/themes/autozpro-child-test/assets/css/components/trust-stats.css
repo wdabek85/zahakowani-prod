@@ -70,6 +70,47 @@
     max-width: 260px;
 }
 
+/* ===================================
+   PRODUCT REVIEWS — opinie Google
+   =================================== */
+
+.product-reviews {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    background: #fff;
+    padding: 48px 0;
+}
+
+.product-reviews__container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 80px;
+}
+
+.product-reviews__title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28px;
+    color: #000;
+    margin: 0 0 24px;
+}
+
+@media (max-width: 599px) {
+    .product-reviews {
+        padding: 32px 0;
+    }
+
+    .product-reviews__container {
+        padding: 0 16px;
+    }
+
+    .product-reviews__title {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+}
+
 /* Tablet — 2 kolumny */
 @media (min-width: 600px) {
     .trust-stats__grid {

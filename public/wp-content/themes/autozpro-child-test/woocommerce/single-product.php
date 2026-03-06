@@ -105,6 +105,7 @@ the_post();
 
 <?php
 get_template_part('template-parts/product/product-section-trust-stats');
+get_template_part('template-parts/product/product-section-reviews');
 get_template_part('template-parts/product/product-section-guides');
 get_template_part('template-parts/product/product-section-related');
 get_template_part('template-parts/product/product-section-featured');
