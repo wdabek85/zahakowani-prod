@@ -78,38 +78,58 @@
     margin-bottom: 0.5rem;
 }
 
-.social-login-buttons div {
+/* Remove plugin's outer container padding/shadow */
+.social-login-buttons .nsl-container {
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: none !important;
+}
+
+.social-login-buttons .nsl-container-buttons {
     width: 100% !important;
 }
 
-.social-login-buttons a {
+.social-login-buttons .nsl-container-buttons a {
+    display: flex !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-decoration: none !important;
+}
+
+/* The actual button */
+.social-login-buttons .nsl-button {
     display: flex !important;
     align-items: center;
     justify-content: center;
     width: 100% !important;
-    box-sizing: border-box !important;
     min-height: 50px;
     padding: 12px 20px !important;
     border: 2px solid #e5e5e5 !important;
     border-radius: 6px !important;
     background: #fff !important;
-    font-size: 0.95rem !important;
-    color: #333 !important;
-    text-decoration: none !important;
-    transition: border-color 0.2s, box-shadow 0.2s;
     cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.social-login-buttons a:hover {
+.social-login-buttons .nsl-button:hover {
     border-color: #4285f4 !important;
     box-shadow: 0 2px 8px rgba(66, 133, 244, 0.15);
 }
 
-.social-login-buttons a img,
-.social-login-buttons a svg {
+/* Google icon */
+.social-login-buttons .nsl-button-svg-container {
+    flex-shrink: 0;
     width: 20px !important;
     height: 20px !important;
-    margin-right: 10px !important;
+    margin-right: 10px;
+}
+
+/* Button label text */
+.social-login-buttons .nsl-button-label-container {
+    color: #333 !important;
+    font-size: 0.95rem !important;
+    font-weight: 500;
 }
 
 /* Responsive — mobile */
