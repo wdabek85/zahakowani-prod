@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1793ba6084be66c369408deb4a719c04",
+    "content-hash": "0cbe9cb3a431197494e9dfa1d95fadb0",
     "packages": [
         {
             "name": "composer/installers",
@@ -1273,6 +1273,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/mailchimp-for-wp/"
+        },
+        {
+            "name": "wpackagist-plugin/nextend-facebook-connect",
+            "version": "3.1.23",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/nextend-facebook-connect/",
+                "reference": "tags/3.1.23"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/nextend-facebook-connect.3.1.23.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/nextend-facebook-connect/"
         },
         {
             "name": "wpackagist-plugin/omnibus",

@@ -31,7 +31,8 @@
         "premium/inpost-pay": "1.5.5.4",
         "premium/autozpro": "1.0.17",
         "wpackagist-plugin/simple-local-avatars": "^2.8",
-        "wpackagist-plugin/litespeed-cache": "^7.7"
+        "wpackagist-plugin/litespeed-cache": "^7.7",
+        "wpackagist-plugin/nextend-facebook-connect": "^3.1"
     },
     "repositories": [
         {

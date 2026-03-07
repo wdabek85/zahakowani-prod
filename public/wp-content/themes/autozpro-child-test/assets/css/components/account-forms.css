@@ -1,0 +1,99 @@
+/* Registration form — billing address + legal checkboxes */
+
+.register-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e5e5;
+}
+
+/* Postcode + City side by side */
+.register-row-half {
+    display: flex;
+    gap: 12px;
+}
+
+.register-row-half .form-row-first {
+    flex: 0 0 35%;
+}
+
+.register-row-half .form-row-last {
+    flex: 1 1 0%;
+}
+
+/* Legal checkboxes */
+.register-legal-checkboxes {
+    margin: 1.25rem 0 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e5e5;
+}
+
+.register-legal-checkboxes .form-row {
+    margin-bottom: 0.5rem;
+}
+
+.register-legal-checkboxes label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    cursor: pointer;
+}
+
+.register-legal-checkboxes input[type="checkbox"] {
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.register-legal-checkboxes a {
+    text-decoration: underline;
+}
+
+/* Login divider — "lub" separator */
+.login-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 1.25rem 0;
+}
+
+.login-divider::before,
+.login-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e5e5;
+}
+
+.login-divider span {
+    font-size: 0.85rem;
+    color: #888;
+    white-space: nowrap;
+}
+
+/* Social login buttons — full width */
+.social-login-buttons {
+    margin-bottom: 0.5rem;
+}
+
+.social-login-buttons a {
+    display: flex !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    justify-content: center;
+}
+
+/* Responsive — mobile */
+@media (max-width: 768px) {
+    .register-row-half {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .register-row-half .form-row-first,
+    .register-row-half .form-row-last {
+        flex: 1 1 100%;
+    }
+}
