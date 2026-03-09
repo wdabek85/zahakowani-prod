@@ -474,3 +474,126 @@ add_action('save_post_product', function ($post_id) {
 
     update_field('product_badges', $warianty, $post_id);
 }, 20); // priority 20 = after description auto-fill (priority 10)
+
+/* ──────────────────────────────────────────────
+ * 9. Sync catalog images → product native meta
+ *
+ * Copies katalog_miniaturka → _thumbnail_id and
+ * katalog_galeria → _product_image_gallery so that
+ * external plugins (CTX Feed, Google Shopping, etc.)
+ * see images without relying on PHP filters.
+ *
+ * Only writes when the product has NO own image/gallery.
+ * ────────────────────────────────────────────── */
+
+/**
+ * Helper: sync images from catalog to a single product.
+ */
+function azp_sync_catalog_images_to_product($product_id, $katalog_id) {
+    // Thumbnail — only if product has no own thumbnail
+    if (! has_post_thumbnail($product_id)) {
+        $miniaturka_id = get_field('katalog_miniaturka', $katalog_id);
+        if ($miniaturka_id) {
+            set_post_thumbnail($product_id, $miniaturka_id);
+        }
+    }
+
+    // Gallery — only if product has no own gallery
+    $existing_gallery = get_post_meta($product_id, '_product_image_gallery', true);
+    if (empty($existing_gallery)) {
+        $galeria_ids = get_field('katalog_galeria', $katalog_id);
+        if (! empty($galeria_ids) && is_array($galeria_ids)) {
+            update_post_meta($product_id, '_product_image_gallery', implode(',', $galeria_ids));
+        }
+    }
+}
+
+// a) Catalog saved → sync images to all linked products
+add_action('save_post_spec_katalog', function ($katalog_id) {
+    if (wp_is_post_revision($katalog_id) || wp_is_post_autosave($katalog_id)) {
+        return;
+    }
+
+    $products = get_posts([
+        'post_type'      => 'product',
+        'posts_per_page' => -1,
+        'meta_key'       => 'numer_katalogowy',
+        'meta_value'     => $katalog_id,
+        'post_status'    => ['publish', 'draft', 'pending', 'private'],
+        'fields'         => 'ids',
+    ]);
+
+    foreach ($products as $product_id) {
+        azp_sync_catalog_images_to_product($product_id, $katalog_id);
+    }
+}, 20);
+
+// b) Product saved → inherit images from linked catalog
+add_action('save_post_product', function ($post_id) {
+    if (wp_is_post_revision($post_id) || wp_is_post_autosave($post_id)) {
+        return;
+    }
+
+    $katalog_id = get_field('numer_katalogowy', $post_id);
+    if (empty($katalog_id)) {
+        return;
+    }
+
+    azp_sync_catalog_images_to_product($post_id, $katalog_id);
+}, 25); // after badge sync (20)
+
+/* ──────────────────────────────────────────────
+ * 10. One-time bulk sync — admin tool
+ *
+ * Visit: /wp-admin/admin.php?action=azp_sync_catalog_images
+ * Syncs catalog images to ALL products missing thumbnails.
+ * Safe to run multiple times (skips products with own images).
+ * ────────────────────────────────────────────── */
+
+add_action('admin_action_azp_sync_catalog_images', function () {
+    if (! current_user_can('manage_woocommerce')) {
+        wp_die('Brak uprawnień.');
+    }
+
+    $products = get_posts([
+        'post_type'      => 'product',
+        'posts_per_page' => -1,
+        'post_status'    => ['publish', 'draft', 'pending', 'private'],
+        'fields'         => 'ids',
+        'meta_query'     => [
+            [
+                'key'     => 'numer_katalogowy',
+                'compare' => 'EXISTS',
+            ],
+        ],
+    ]);
+
+    $synced = 0;
+    foreach ($products as $product_id) {
+        $katalog_id = get_field('numer_katalogowy', $product_id);
+        if (empty($katalog_id)) {
+            continue;
+        }
+
+        $had_thumb   = has_post_thumbnail($product_id);
+        $had_gallery = ! empty(get_post_meta($product_id, '_product_image_gallery', true));
+
+        azp_sync_catalog_images_to_product($product_id, $katalog_id);
+
+        if (! $had_thumb || ! $had_gallery) {
+            $synced++;
+        }
+    }
+
+    wp_redirect(admin_url('edit.php?post_type=product&azp_synced=' . $synced));
+    exit;
+});
+
+// Admin notice after bulk sync
+add_action('admin_notices', function () {
+    if (! isset($_GET['azp_synced'])) {
+        return;
+    }
+    $count = (int) $_GET['azp_synced'];
+    echo '<div class="notice notice-success is-dismissible"><p>Zsynchronizowano obrazki z katalogu dla <strong>' . $count . '</strong> produktów.</p></div>';
+});
