@@ -129,3 +129,34 @@ add_action( 'wp_body_open', function () {
     <?php
 }, 1 );
 
+/**
+ * Tłumaczenie stringów parent theme (autozpro) — header account dropdown.
+ */
+add_filter( 'gettext', function ( string $translation, string $text, string $domain ): string {
+    if ( $domain !== 'autozpro' ) {
+        return $translation;
+    }
+
+    static $map = [
+        'Sign in'             => 'Zaloguj się',
+        'Create an Account'   => 'Utwórz konto',
+        'Register'            => 'Zarejestruj się',
+        'Username or email'   => 'E-mail lub nazwa użytkownika',
+        'Username'            => 'Nazwa użytkownika',
+        'Password'            => 'Hasło',
+        'Login'               => 'Zaloguj się',
+        'Log in'              => 'Zaloguj się',
+        'Lost your password?' => 'Nie pamiętasz hasła?',
+        'Dashboard'           => 'Kokpit',
+        'Orders'              => 'Zamówienia',
+        'Downloads'           => 'Pobrania',
+        'Edit Address'        => 'Edytuj adres',
+        'Account Details'     => 'Szczegóły konta',
+        'Log Out'             => 'Wyloguj się',
+        'Log out'             => 'Wyloguj się',
+        'My Account'          => 'Moje konto',
+    ];
+
+    return $map[ $text ] ?? $translation;
+}, 10, 3 );
+
