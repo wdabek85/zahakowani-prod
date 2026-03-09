@@ -155,16 +155,25 @@ $is_popular = get_field('product_popular');
     </div>
     
     <!-- Prawa kolumna: Buy box -->
+    <?php $b2b = azp_b2b_get_product_pricing($product); ?>
     <div class="product-card__buybox">
-        
+
         <!-- Cena -->
         <div class="product-card__price">
             <span class="price-number display-lg-bold">
-                <?= number_format($product->get_price(), 2, ',', ' ') ?>
+                <?= number_format($b2b ? $b2b['b2b_price'] : $product->get_price(), 2, ',', ' ') ?>
             </span>
             <span class="price-currency display-xs-medium">zł/szt.</span>
+            <?php if ($b2b) : ?>
+                <span class="buy-box__b2b-badge">-<?= $b2b['discount_percent'] ?>%</span>
+            <?php endif; ?>
         </div>
-        
+        <?php if ($b2b) : ?>
+            <p class="buy-box__catalog-price text-sm-regular">
+                Cena katalogowa: <span class="buy-box__catalog-price-amount"><?= number_format($b2b['catalog_price'], 2, ',', ' ') ?> zł</span>
+            </p>
+        <?php endif; ?>
+
         <p class="price-note text-xs-regular">Cena zawiera 23% VAT, nie obejmuje kosztów dostawy</p>
         
         <!-- Dostawa -->

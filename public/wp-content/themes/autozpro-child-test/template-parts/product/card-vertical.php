@@ -60,8 +60,19 @@ if (!empty($cats) && !is_wp_error($cats)) {
             </div>
         </div>
 
+        <?php $b2b = azp_b2b_get_product_pricing($product); ?>
         <div class="v-product-card__price-block">
-            <p class="v-product-card__price"><?= number_format($product->get_price(), 2, '.', '') ?>zł</p>
+            <p class="v-product-card__price">
+                <?= number_format($b2b ? $b2b['b2b_price'] : $product->get_price(), 2, '.', '') ?>zł
+                <?php if ($b2b) : ?>
+                    <span class="buy-box__b2b-badge">-<?= $b2b['discount_percent'] ?>%</span>
+                <?php endif; ?>
+            </p>
+            <?php if ($b2b) : ?>
+                <p class="buy-box__catalog-price text-xs-regular">
+                    Cena katalogowa: <span class="buy-box__catalog-price-amount"><?= number_format($b2b['catalog_price'], 2, '.', '') ?> zł</span>
+                </p>
+            <?php endif; ?>
             <p class="v-product-card__vat">Cena zawiera 23% VAT, nie obejmuje <strong>kosztów dostawy</strong></p>
         </div>
     </div>

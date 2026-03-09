@@ -1,0 +1,174 @@
+/* B2B Panel — Moje Konto */
+
+.b2b-panel {
+    max-width: 900px;
+}
+
+/* Cards grid */
+.b2b-panel__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.b2b-card {
+    background: #f8f9fa;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: center;
+}
+
+.b2b-card--accent {
+    background: #1a1a2e;
+    color: #fff;
+    border-color: #1a1a2e;
+}
+
+.b2b-card__label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    margin-bottom: 0.5rem;
+}
+
+.b2b-card__value {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.b2b-card--accent .b2b-card__value {
+    color: #4ade80;
+}
+
+.b2b-card__sublabel {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Badges */
+.b2b-badge {
+    display: inline-block;
+    padding: 0.2em 0.6em;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.b2b-badge--green {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.b2b-badge--yellow {
+    background: #fef9c3;
+    color: #854d0e;
+}
+
+/* Info box */
+.b2b-panel__info {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.b2b-panel__info strong {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.b2b-panel__info ul {
+    margin: 0;
+    padding-left: 1.25rem;
+}
+
+.b2b-panel__info li {
+    margin-bottom: 0.25rem;
+}
+
+/* History table */
+.b2b-panel__history h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+.b2b-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.b2b-table th,
+.b2b-table td {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.b2b-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.b2b-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+/* Buy-box B2B pricing */
+.buy-box__b2b-badge {
+    display: inline-block;
+    background: #16a34a;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.15em 0.5em;
+    border-radius: 4px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.buy-box__catalog-price {
+    color: #6b7280;
+    margin-top: 0.25rem;
+}
+
+.buy-box__catalog-price-amount {
+    text-decoration: line-through;
+}
+
+/* B2B price in WC grids (related, upsells, widgets) */
+.b2b-price-wrap {
+    display: inline-block;
+    line-height: 1.4;
+}
+
+.b2b-price-main {
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .b2b-panel__cards {
+        grid-template-columns: 1fr;
+    }
+
+    .b2b-table {
+        font-size: 0.82rem;
+    }
+
+    .b2b-table th,
+    .b2b-table td {
+        padding: 0.5rem;
+    }
+}

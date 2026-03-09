@@ -24,6 +24,11 @@ require_once get_stylesheet_directory() . '/inc/cpt-guide.php';
 require_once get_stylesheet_directory() . '/inc/acf-spec-templates.php';
 require_once get_stylesheet_directory() . '/inc/cpt-spec-katalog.php';
 require_once get_stylesheet_directory() . '/inc/acf-variant-comparison.php';
+require_once get_stylesheet_directory() . '/inc/b2b/settings.php';
+require_once get_stylesheet_directory() . '/inc/b2b/role.php';
+require_once get_stylesheet_directory() . '/inc/b2b/tracking.php';
+require_once get_stylesheet_directory() . '/inc/b2b/discount.php';
+require_once get_stylesheet_directory() . '/inc/b2b/my-account.php';
 
 /**
  * Breadcrumbs on blog posts and guides.
