@@ -109,6 +109,7 @@ add_action( 'wp_head', function () {
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-479VCXMG0Y');
+      gtag('config', 'AW-17876158382');
     </script>
     <?php
 }, 1 );
