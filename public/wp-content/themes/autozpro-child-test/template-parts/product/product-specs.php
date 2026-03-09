@@ -31,7 +31,7 @@ $parametry = [
     </div>
 
     <div class="under-spec">
-        <a class="text-xs-bold" href="#opis-produktu">Zobacz Pełen opis</a>
-        <a class="text-xs-bold" href="<?= get_field('certyfikat_pdf') ?>" target="_blank">Pobierz certyfikat</a>
+        <a class="text-xs-bold" href="#opis">Zobacz Pełen opis</a>
+        <a class="text-xs-bold" href="#certyfikaty">Pobierz certyfikat</a>
     </div>
 </div>
