@@ -87,3 +87,22 @@ add_action( 'autozpro_single_post_bottom', function () {
     }
 }, 8 );
 
+/**
+ * Google Analytics 4 — only on production.
+ */
+add_action( 'wp_head', function () {
+    if ( defined( 'WP_ENV' ) && WP_ENV !== 'production' ) {
+        return;
+    }
+    ?>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-479VCXMG0Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-479VCXMG0Y');
+    </script>
+    <?php
+}, 1 );
+
