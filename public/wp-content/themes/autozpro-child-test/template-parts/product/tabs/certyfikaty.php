@@ -13,7 +13,7 @@ if (empty($certyfikaty)) return;
 
 // Mapowanie typów na miniaturki
 $cert_images = [
-    'e20_hak'   => get_stylesheet_directory_uri() . '/assets/images/certificates/e20-hak.png',
+    'e20_hak'   => get_stylesheet_directory_uri() . '/assets/images/certificates/e20-hak.webp',
     'e20_modul' => get_stylesheet_directory_uri() . '/assets/images/certificates/e20-modul.png',
     'pja'       => get_stylesheet_directory_uri() . '/assets/images/certificates/pja.png',
 ];
