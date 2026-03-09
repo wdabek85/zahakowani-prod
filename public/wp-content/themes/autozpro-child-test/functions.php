@@ -155,6 +155,12 @@ add_filter( 'gettext', function ( string $translation, string $text, string $dom
         'Log Out'             => 'Wyloguj się',
         'Log out'             => 'Wyloguj się',
         'My Account'          => 'Moje konto',
+        // 404
+        'Oops! that links is broken.'                          => 'Ups! Ten link nie działa.',
+        'Page doesn\'t exist or some other error occured.'     => 'Strona nie istnieje lub wystąpił inny błąd.',
+        ' Go to our '                                         => ' Przejdź do ',
+        'Home page'                                            => 'Strony głównej',
+        '404 Page'                                             => 'Strona 404',
     ];
 
     return $map[ $text ] ?? $translation;
