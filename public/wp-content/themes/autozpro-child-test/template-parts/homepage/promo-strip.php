@@ -12,8 +12,8 @@
         <div class="promo-strip__content">
             <p class="text-md-bold">
                 Darmowa Dostawa od 450zł. Oraz
-                <strong class="text-primary">RABAT 5%</strong>
-                na pierwsze zakupy dla Zarejestrowanych użytkowników.
+                <strong class="text-primary">RABAT 10%</strong>
+                na kolejne zakupy za polecenie nas Znajomemu.
                 <a href="/regulamin-promocji" class="text-primary">Sprawdź Regulamin Promocji</a>
             </p>
         </div>
