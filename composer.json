@@ -37,7 +37,8 @@
         "wpackagist-plugin/limit-login-attempts-reloaded": "^2.26",
         "wpackagist-plugin/wp-2fa": "^3.1",
         "wpackagist-plugin/seo-by-rank-math": "^1.0",
-        "wpackagist-plugin/duracelltomi-google-tag-manager": "^1.22"
+        "wpackagist-plugin/duracelltomi-google-tag-manager": "^1.22",
+        "wpackagist-plugin/webappick-product-feed-for-woocommerce": "^6.6"
     },
     "repositories": [
         {

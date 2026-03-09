@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9f66df75dc7acc30a80c5d6491ae1ae",
+    "content-hash": "75a8e49feb9dd6461c9e2123050a7459",
     "packages": [
         {
             "name": "composer/installers",
@@ -1399,6 +1399,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/svg-support/"
+        },
+        {
+            "name": "wpackagist-plugin/webappick-product-feed-for-woocommerce",
+            "version": "6.6.25",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/webappick-product-feed-for-woocommerce/",
+                "reference": "tags/6.6.25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/webappick-product-feed-for-woocommerce.6.6.25.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/webappick-product-feed-for-woocommerce/"
         },
         {
             "name": "wpackagist-plugin/woo-bought-together",
