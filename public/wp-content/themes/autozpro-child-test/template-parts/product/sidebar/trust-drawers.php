@@ -26,13 +26,11 @@ defined('ABSPATH') || exit;
         <h4>Jak zwrócić produkt?</h4>
         <ol>
             <li>Wypełnij formularz zwrotu dostępny na stronie <strong>Moje Konto → Zamówienia</strong></li>
-            <li>Zapakuj produkt w oryginalne opakowanie</li>
             <li>Nadaj przesyłkę na adres podany w formularzu</li>
         </ol>
 
         <h4>Ważne informacje</h4>
         <ul>
-            <li>Produkt musi być nieużywany i w oryginalnym opakowaniu</li>
             <li>Zwrot pieniędzy w ciągu <strong>14 dni roboczych</strong> od otrzymania przesyłki</li>
             <li>Koszt przesyłki zwrotnej pokrywa kupujący</li>
         </ul>
