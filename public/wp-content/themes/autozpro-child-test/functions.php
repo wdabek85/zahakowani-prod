@@ -29,6 +29,7 @@ require_once get_stylesheet_directory() . '/inc/b2b/role.php';
 require_once get_stylesheet_directory() . '/inc/b2b/tracking.php';
 require_once get_stylesheet_directory() . '/inc/b2b/discount.php';
 require_once get_stylesheet_directory() . '/inc/b2b/my-account.php';
+require_once get_stylesheet_directory() . '/inc/trusted-shops.php';
 
 /**
  * Breadcrumbs on blog posts and guides.
