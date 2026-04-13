@@ -8,6 +8,7 @@ require_once get_stylesheet_directory() . '/inc/woo-cleanup.php';
 require_once get_stylesheet_directory() . '/inc/helpers/icons.php';
 require_once get_stylesheet_directory() . '/inc/helpers/delivery-message.php';
 require_once get_stylesheet_directory() . '/inc/widgets/vehicle-search-widget.php';
+require_once get_stylesheet_directory() . '/inc/widgets/category-filter-widget.php';
 require_once get_stylesheet_directory() . '/inc/attributes.php';
 
 /**
