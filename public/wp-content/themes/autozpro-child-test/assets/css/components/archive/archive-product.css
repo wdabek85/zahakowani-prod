@@ -82,6 +82,19 @@ body.tax-product_brand {
     margin-bottom: 24px;
 }
 
+/* ---------- Price filter — reserve height to prevent CLS ---------- */
+.widget_price_filter .price_slider_wrapper {
+    min-height: 50px;
+}
+
+.widget_price_filter .price_slider {
+    margin-bottom: 16px !important;
+}
+
+.widget_price_filter .price_slider_amount {
+    min-height: 32px;
+}
+
 /* ---------- Sortowanie i widok ---------- */
 .woocommerce-ordering,
 .woocommerce-result-count {
