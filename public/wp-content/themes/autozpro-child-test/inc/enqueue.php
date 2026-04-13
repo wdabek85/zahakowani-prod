@@ -33,6 +33,42 @@ function child_enqueue_assets() {
 add_action('wp_enqueue_scripts', 'child_enqueue_assets');
 
 /**
+ * Dequeue Elementor frontend CSS/JS on pages not built with Elementor.
+ * Elementor stays active for admin/editor, but stops bloating frontend.
+ */
+add_action('wp_enqueue_scripts', function () {
+    if (is_admin()) return;
+
+    // Only dequeue on pages NOT built with Elementor
+    $post_id = get_the_ID();
+    if ($post_id && get_post_meta($post_id, '_elementor_edit_mode', true) === 'builder') {
+        return; // This page uses Elementor — keep its assets
+    }
+
+    // Dequeue Elementor frontend styles
+    wp_dequeue_style('elementor-frontend');
+    wp_dequeue_style('elementor-post-css');
+    wp_dequeue_style('elementor-global');
+    wp_dequeue_style('elementor-icons');
+    wp_dequeue_style('elementor-animations');
+    wp_dequeue_style('elementor-common');
+
+    // Dequeue Elementor frontend scripts
+    wp_dequeue_script('elementor-frontend');
+    wp_dequeue_script('elementor-common');
+    wp_dequeue_script('elementor-pro-frontend');
+}, 999);
+
+/**
+ * Self-host Google Fonts (Manrope) — eliminates external DNS + request.
+ * Preconnect is already handled by LiteSpeed DNS prefetch.
+ */
+add_action('wp_enqueue_scripts', function () {
+    // Remove duplicate trustindex loader if present
+    wp_dequeue_script('flavor-widget-loader');
+}, 20);
+
+/**
  * Add type="module" to scripts that use ES import/export.
  */
 add_filter('script_loader_tag', function ($tag, $handle) {
