@@ -120,7 +120,7 @@ defined('ABSPATH') || exit;
                 <tr>
                     <td>
                         <strong>Odbiór osobisty</strong>
-                        <small>Starogard Gdański</small>
+                        <small>Lubichowo</small>
                     </td>
                     <td>0,00 zł</td>
                 </tr>

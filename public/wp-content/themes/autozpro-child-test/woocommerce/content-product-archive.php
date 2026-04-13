@@ -189,11 +189,11 @@ $is_popular = get_field('product_popular');
         
         <p class="delivery-time pickup-hover text-sm-regular">
             <?= get_icon('map-pin', 'icon-xs') ?>
-            Odbierz do <strong class="text-accent">18:00</strong> w Starogardzie
+            Odbierz do <strong class="text-accent">18:00</strong> w Lubichowie
             <span class="pickup-tooltip">
                 <strong>Odbiór osobisty</strong>
-                ul. Lubichowska 2c<br>
-                83-200 Starogard Gdański<br><br>
+                ul. Dworcowa 35<br>
+                83-240 Lubichowo<br><br>
                 <strong>Godziny otwarcia:</strong><br>
                 Pon – Pt: 8:00 – 18:00<br><br>
                 <em>Dotyczy zamówień złożonych do 16:00</em>

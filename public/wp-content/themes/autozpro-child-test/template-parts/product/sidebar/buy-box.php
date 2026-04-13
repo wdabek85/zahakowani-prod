@@ -13,7 +13,7 @@ $delivery = get_delivery_message();
 $dostawa_info_prefix = 'Darmowa Dostawa';
 $dostawa_info_highlight = 'od 450zł';
 $dostawa_czas_2_prefix = 'Odbierz do';
-$dostawa_czas_2_highlight = '18:00 w Starogardzie';
+$dostawa_czas_2_highlight = '18:00 w Lubichowie';
 $telefon = '+48 536 731 515';
 ?>
 
@@ -72,8 +72,8 @@ $telefon = '+48 536 731 515';
             <strong class="text-accent"><?= esc_html($dostawa_czas_2_highlight) ?></strong>
             <span class="pickup-tooltip">
                 <strong>Odbiór osobisty</strong>
-                ul. Lubichowska 2c<br>
-                83-200 Starogard Gdański<br><br>
+                ul. Dworcowa 35<br>
+                83-240 Lubichowo<br><br>
                 <strong>Godziny otwarcia:</strong><br>
                 Pon – Pt: 8:00 – 18:00<br><br>
                 <em>Dotyczy zamówień złożonych do 16:00</em>

@@ -1,0 +1,227 @@
+/* ══════════════════════════
+   MOBILE NAV — drill-down
+   ══════════════════════════ */
+
+/* Overlay */
+.mobile-nav-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .25s, visibility .25s;
+}
+
+.mobile-nav-overlay.is-open {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Panel — full width from right */
+.mobile-nav-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    box-shadow: -4px 0 20px rgba(0,0,0,.15);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+}
+
+.mobile-nav-overlay.is-open .mobile-nav-panel {
+    transform: translateX(0);
+}
+
+/* Dimmed background */
+.mobile-nav-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.4);
+    z-index: -1;
+}
+
+/* ─── Header ─── */
+.mobile-nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--h-border);
+    flex-shrink: 0;
+}
+
+.mobile-nav-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--h-heading);
+}
+
+.mobile-nav-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: var(--h-text);
+    padding: 0;
+    border-radius: var(--h-radius);
+    transition: background .15s;
+}
+
+.mobile-nav-close-btn:hover {
+    background: var(--h-bg-muted);
+}
+
+/* ─── Slides container ─── */
+.mobile-nav-slides {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Single slide */
+.mobile-nav-slide {
+    position: absolute;
+    inset: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    background: #fff;
+    visibility: hidden;
+}
+
+.mobile-nav-slide.is-active {
+    transform: translateX(0);
+    visibility: visible;
+    z-index: 1;
+}
+
+/* When going back, the exiting slide goes right */
+.mobile-nav-slide.is-exiting-right {
+    transform: translateX(100%);
+    visibility: visible;
+    z-index: 0;
+}
+
+/* When going forward, the previous slide goes left */
+.mobile-nav-slide.is-exiting-left {
+    transform: translateX(-30%);
+    visibility: visible;
+    z-index: 0;
+    opacity: .5;
+}
+
+/* ─── Back button ─── */
+.mobile-nav-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 20px;
+    border: none;
+    background: var(--h-bg-muted);
+    color: var(--h-text);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+}
+
+.mobile-nav-back svg {
+    transform: rotate(180deg);
+    width: 14px;
+    height: 14px;
+}
+
+/* ─── Slide title ─── */
+.mobile-nav-slide-title {
+    display: block;
+    padding: 16px 20px 8px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--h-heading);
+    text-decoration: none;
+}
+
+.mobile-nav-slide-title:hover {
+    color: var(--h-primary);
+}
+
+/* ─── Nav list ─── */
+.mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mobile-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    color: var(--h-heading);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-bottom: 1px solid var(--h-border);
+    transition: background .1s;
+}
+
+.mobile-nav-link:active {
+    background: var(--h-bg-muted);
+}
+
+.mobile-nav-link svg {
+    flex-shrink: 0;
+    color: #ccc;
+    width: 16px;
+    height: 16px;
+}
+
+.mobile-nav-link.has-children svg {
+    color: var(--h-primary);
+}
+
+/* "Zobacz wszystkie" link */
+.mobile-nav-link--all {
+    color: var(--h-primary);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/* Count badge */
+.mobile-nav-count {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--h-primary);
+    border-radius: 10px;
+    padding: 1px 7px;
+    line-height: 1.4;
+    margin-left: auto;
+    margin-right: 8px;
+}
+
+/* ─── Divider ─── */
+.mobile-nav-divider {
+    height: 8px;
+    background: var(--h-bg-muted);
+    border-bottom: 1px solid var(--h-border);
+}
+
+/* ─── Override: hide parent theme mobile nav ─── */
+.autozpro-mobile-nav,
+.autozpro-overlay {
+    display: none !important;
+}

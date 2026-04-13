@@ -1,0 +1,356 @@
+/* ══════════════════════════
+   MEGA MENU
+   ══════════════════════════ */
+
+/* ─── Trigger button ─── */
+.header-mega-trigger-wrap {
+    flex: 0 0 auto;
+    position: static;
+}
+
+.header-main-inner {
+    position: relative;
+}
+
+.mega-menu-trigger {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    box-sizing: border-box;
+    padding: 0 16px;
+    border: 2px solid var(--h-primary);
+    border-radius: var(--h-radius);
+    background: none;
+    color: var(--h-primary);
+    font-weight: 600;
+    font-size: var(--h-font);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .2s, color .2s;
+}
+
+.mega-menu-trigger:hover,
+.mega-menu-trigger[aria-expanded="true"] {
+    background: var(--h-primary);
+    color: #fff;
+}
+
+.mega-menu-trigger:hover svg,
+.mega-menu-trigger[aria-expanded="true"] svg {
+    stroke: #fff;
+}
+
+/* ─── Dropdown panel ─── */
+.mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    background: #fff;
+    box-shadow: 0 12px 40px rgba(0,0,0,.14);
+    border-radius: 0 0 8px 8px;
+}
+
+.mega-menu.is-open {
+    display: block;
+}
+
+.mega-menu-inner {
+    display: flex;
+    min-height: 320px;
+}
+
+/* ─── Sidebar (category list) ─── */
+.mega-sidebar {
+    flex: 0 0 220px;
+    background: var(--h-bg-muted);
+    padding: 12px 0;
+    border-right: 1px solid var(--h-border);
+    display: flex;
+    flex-direction: column;
+}
+
+.mega-sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    color: var(--h-heading);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background .1s, color .1s;
+    border-left: 3px solid transparent;
+}
+
+.mega-sidebar-item:hover,
+.mega-sidebar-item.is-active {
+    background: #fff;
+    color: var(--h-primary);
+    border-left-color: var(--h-primary);
+}
+
+.mega-sidebar-item svg {
+    opacity: .4;
+    flex-shrink: 0;
+}
+
+.mega-sidebar-item:hover svg,
+.mega-sidebar-item.is-active svg {
+    opacity: 1;
+    stroke: var(--h-primary);
+}
+
+.mega-sidebar-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* ─── Content panels ─── */
+.mega-content {
+    flex: 1;
+    padding: 20px 24px;
+    overflow-y: auto;
+    max-height: 440px;
+}
+
+.mega-content-panel {
+    display: none;
+}
+
+.mega-content-panel.is-active {
+    display: block;
+}
+
+/* ─── Panel grid (subcategories in columns) ─── */
+.mega-panel {
+    display: grid;
+    gap: 24px 32px;
+}
+
+.mega-panel[data-cols="1"] { grid-template-columns: 1fr; }
+.mega-panel[data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
+.mega-panel[data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+.mega-panel[data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+
+/* ─── Column (brand / subcategory) ─── */
+.mega-column-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--h-heading);
+    text-decoration: none;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 2px solid var(--h-primary);
+    transition: color .15s;
+}
+
+.mega-column-title:hover {
+    color: var(--h-primary);
+}
+
+.mega-count {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--h-primary);
+    border-radius: 10px;
+    padding: 1px 7px;
+    line-height: 1.4;
+}
+
+/* ─── Links (models / grandchildren) ─── */
+.mega-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mega-links li + li {
+    margin-top: 2px;
+}
+
+.mega-links a {
+    display: block;
+    padding: 5px 0;
+    font-size: 13px;
+    color: var(--h-text);
+    text-decoration: none;
+    transition: color .15s;
+}
+
+.mega-links a:hover {
+    color: var(--h-primary);
+}
+
+/* Level 3: Model link (bolder when has generations) */
+.mega-link-model {
+    font-weight: 500;
+    color: var(--h-heading);
+}
+
+.has-sublinks > .mega-link-model {
+    font-weight: 600;
+}
+
+/* Level 4: Generations */
+.mega-sublinks {
+    list-style: none;
+    margin: 0;
+    padding: 0 0 4px 12px;
+    border-left: 2px solid var(--h-border);
+}
+
+.mega-sublinks li + li {
+    margin-top: 1px;
+}
+
+.mega-sublinks a {
+    display: block;
+    padding: 3px 0;
+    font-size: 12px;
+    color: var(--h-text);
+    text-decoration: none;
+    transition: color .15s;
+}
+
+.mega-sublinks a:hover {
+    color: var(--h-primary);
+}
+
+/* ─── Simple panel (few subcategories — desc + image) ─── */
+.mega-panel--simple {
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+}
+
+.mega-simple-content {
+    flex: 1;
+}
+
+.mega-simple-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--h-heading);
+    margin: 0 0 10px;
+}
+
+.mega-simple-desc {
+    font-size: 14px;
+    color: var(--h-text);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.mega-simple-desc p {
+    margin: 0 0 8px;
+}
+
+.mega-simple-links {
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.mega-simple-links li a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--h-bg-muted);
+    border-radius: var(--h-radius);
+    color: var(--h-heading);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: background .15s, color .15s;
+}
+
+.mega-simple-links li a:hover {
+    background: var(--h-primary);
+    color: #fff;
+}
+
+.mega-simple-links li a .mega-count {
+    font-size: 10px;
+}
+
+.mega-simple-links li a:hover .mega-count {
+    background: rgba(255,255,255,.3);
+}
+
+.mega-simple-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    background: var(--h-primary);
+    color: #fff;
+    border-radius: var(--h-radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background .2s;
+}
+
+.mega-simple-cta:hover {
+    background: var(--h-primary-hover);
+    color: #fff;
+}
+
+.mega-simple-image {
+    flex: 0 0 200px;
+    max-width: 200px;
+}
+
+.mega-simple-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* ══════════════════════════
+   NAV MEGA DROPDOWN
+   (for "Kompletne Haki" in bottom nav)
+   ══════════════════════════ */
+.header-nav-inner {
+    position: relative;
+}
+
+.nav-mega-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    background: #fff;
+    box-shadow: 0 12px 40px rgba(0,0,0,.14);
+    border-radius: 0 0 8px 8px;
+}
+
+.nav-mega-dropdown.is-open {
+    display: block;
+}
+
+.nav-mega-inner {
+    padding: 24px 40px;
+}
+
+.nav-mega-footer {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--h-border);
+}
