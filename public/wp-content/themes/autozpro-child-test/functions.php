@@ -35,6 +35,7 @@ require_once get_stylesheet_directory() . '/inc/trusted-shops.php';
 require_once get_stylesheet_directory() . '/inc/legal-bar.php';
 require_once get_stylesheet_directory() . '/inc/ajax-search.php';
 require_once get_stylesheet_directory() . '/inc/mega-menu.php';
+require_once get_stylesheet_directory() . '/inc/admin-fixes.php';
 
 /**
  * Breadcrumbs on blog posts and guides.
