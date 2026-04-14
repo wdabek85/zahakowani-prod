@@ -354,7 +354,7 @@
     display: grid;
     grid-template-columns: 260px 1fr 280px;
     min-height: 440px;
-    max-height: 560px;
+    max-height: calc(100vh - 240px);
 }
 
 .nav-mega-col-heading {
@@ -439,13 +439,20 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    columns: 2;
+    columns: 3;
     column-gap: 24px;
 }
 
 .nav-mega-models-list > li {
     break-inside: avoid;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
+}
+
+/* More columns when space allows */
+@media (min-width: 1280px) {
+    .nav-mega-models-list {
+        columns: 4;
+    }
 }
 
 .nav-mega-model {
