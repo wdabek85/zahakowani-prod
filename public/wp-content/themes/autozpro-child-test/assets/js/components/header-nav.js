@@ -205,9 +205,16 @@
 
         // ─── Brand hover with intent detection (Amazon-style) ───
         var brands = dropdown.querySelectorAll('.nav-mega-brand');
-        var cardEl = dropdown.querySelector('#nav-mega-card');
+        var cardsWrap = dropdown.querySelector('.nav-mega-cards-wrap');
         var modelsCol = dropdown.querySelector('.nav-mega-models');
         var brandsCol = dropdown.querySelector('.nav-mega-brands');
+
+        // Initialize default card as active
+        if (cardsWrap) {
+            var defaultCardKey = cardsWrap.getAttribute('data-default-card');
+            var defaultCard = cardsWrap.querySelector('[data-card-for="' + defaultCardKey + '"]');
+            if (defaultCard) defaultCard.classList.add('is-active');
+        }
 
         var switchTimer = null;
         var lastMouseX = 0;
@@ -234,7 +241,15 @@
             var targetPanel = dropdown.querySelector('[data-brand-panel="' + brandId + '"]');
             if (targetPanel) targetPanel.classList.add('is-active');
 
-            if (cardEl) updateCard(cardEl, brand);
+            // Switch featured card
+            if (cardsWrap) {
+                var featuredId = brand.getAttribute('data-featured-id');
+                dropdown.querySelectorAll('.nav-mega-card-item.is-active').forEach(function (el) {
+                    el.classList.remove('is-active');
+                });
+                var targetCard = cardsWrap.querySelector('[data-card-for="card-' + featuredId + '"]');
+                if (targetCard) targetCard.classList.add('is-active');
+            }
         }
 
         // Detect if user is moving toward the models column
@@ -287,29 +302,6 @@
             });
         }
 
-        function updateCard(cardEl, brandEl) {
-            var img = brandEl.getAttribute('data-card-image');
-            var title = brandEl.getAttribute('data-card-title');
-            var url = brandEl.getAttribute('data-card-url');
-            var price = brandEl.getAttribute('data-card-price');
-
-            if (!img && !title) {
-                cardEl.innerHTML = '';
-                return;
-            }
-
-            var html = '<div class="nav-mega-col-heading">Polecany</div>';
-            html += '<a href="' + (url || '#') + '" class="nav-mega-card-link">';
-            if (img) {
-                html += '<img src="' + img + '" alt="" class="nav-mega-card-img">';
-            }
-            html += '<div class="nav-mega-card-body">';
-            html += '<span class="nav-mega-card-title">' + (title || '') + '</span>';
-            if (price) html += '<span class="nav-mega-card-price">' + price + '</span>';
-            html += '</div></a>';
-
-            cardEl.innerHTML = html;
-        }
     }
 
     /* ─── Close dropdowns on outside click ─── */

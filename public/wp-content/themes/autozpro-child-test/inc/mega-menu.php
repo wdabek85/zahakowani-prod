@@ -239,20 +239,30 @@ function child_render_mega_menu() {
 }
 
 /**
- * Get representative product for a category (first published product).
- * Uses get_posts — does NOT mutate global $post.
+ * Get featured product ID for a category.
+ * 1. Check ACF field `featured_product` on the term
+ * 2. Fallback: bestseller (most total_sales) within category
  */
-function child_get_category_representative($term_id) {
-    if (!function_exists('wc_get_product')) return null;
-
+function child_get_category_featured_product_id($term_id) {
     static $cache = [];
     if (isset($cache[$term_id])) return $cache[$term_id];
 
+    // 1. ACF manual selection
+    if (function_exists('get_field')) {
+        $manual = get_field('featured_product', 'product_cat_' . $term_id);
+        if ($manual && is_numeric($manual)) {
+            $cache[$term_id] = (int) $manual;
+            return (int) $manual;
+        }
+    }
+
+    // 2. Fallback: bestseller
     $posts = get_posts([
         'post_type'      => 'product',
         'post_status'    => 'publish',
         'posts_per_page' => 1,
-        'orderby'        => 'date',
+        'orderby'        => 'meta_value_num',
+        'meta_key'       => 'total_sales',
         'order'          => 'DESC',
         'tax_query'      => [[
             'taxonomy'         => 'product_cat',
@@ -260,27 +270,13 @@ function child_get_category_representative($term_id) {
             'terms'            => $term_id,
             'include_children' => true,
         ]],
-        'suppress_filters' => false,
         'no_found_rows'    => true,
+        'fields'           => 'ids',
     ]);
 
-    if (empty($posts)) {
-        $cache[$term_id] = null;
-        return null;
-    }
-
-    $post_id = $posts[0]->ID;
-    $product = wc_get_product($post_id);
-
-    $data = [
-        'title' => get_the_title($post_id),
-        'url'   => get_permalink($post_id),
-        'image' => get_the_post_thumbnail_url($post_id, 'medium') ?: '',
-        'price' => $product ? $product->get_price_html() : '',
-    ];
-
-    $cache[$term_id] = $data;
-    return $data;
+    $id = !empty($posts) ? (int) $posts[0] : 0;
+    $cache[$term_id] = $id;
+    return $id;
 }
 
 /**
@@ -306,8 +302,8 @@ function child_render_haki_mega_dropdown() {
     $brands = $haki['children'];
     if (empty($brands)) return;
 
-    // Default "featured" card = representative of whole category
-    $default_card = child_get_category_representative($haki['term']->term_id);
+    // Default "featured" product ID = for whole haki category
+    $default_featured_id = child_get_category_featured_product_id($haki['term']->term_id);
     ?>
     <div class="nav-mega-dropdown" id="nav-mega-haki">
         <div class="nav-mega-3col">
@@ -317,18 +313,13 @@ function child_render_haki_mega_dropdown() {
                 <div class="nav-mega-col-heading">Marka</div>
                 <ul>
                     <?php foreach ($brands as $i => $brand) :
-                        $brand_rep = child_get_category_representative($brand['term']->term_id);
+                        $brand_featured_id = child_get_category_featured_product_id($brand['term']->term_id);
                     ?>
                         <li>
                             <a href="<?php echo esc_url($brand['url']); ?>"
                                class="nav-mega-brand<?php echo $i === 0 ? ' is-active' : ''; ?>"
                                data-brand-id="brand-<?php echo $brand['term']->term_id; ?>"
-                               <?php if ($brand_rep) : ?>
-                                   data-card-image="<?php echo esc_url($brand_rep['image']); ?>"
-                                   data-card-title="<?php echo esc_attr($brand_rep['title']); ?>"
-                                   data-card-url="<?php echo esc_url($brand_rep['url']); ?>"
-                                   data-card-price="<?php echo esc_attr($brand_rep['price']); ?>"
-                               <?php endif; ?>>
+                               data-featured-id="<?php echo (int) $brand_featured_id; ?>">
                                 <span><?php echo esc_html($brand['term']->name); ?></span>
                                 <?php echo get_icon('chevron-right', 'icon-xs'); ?>
                             </a>
@@ -374,24 +365,43 @@ function child_render_haki_mega_dropdown() {
                 <?php endforeach; ?>
             </div>
 
-            <?php // ─── COL 3: Representative card ─── ?>
+            <?php // ─── COL 3: Featured product card (pre-rendered per brand) ─── ?>
             <div class="nav-mega-card" id="nav-mega-card">
-                <?php if ($default_card) : ?>
-                    <div class="nav-mega-col-heading">Polecany</div>
-                    <a href="<?php echo esc_url($default_card['url']); ?>" class="nav-mega-card-link">
-                        <?php if ($default_card['image']) : ?>
-                            <img src="<?php echo esc_url($default_card['image']); ?>"
-                                 alt="<?php echo esc_attr($default_card['title']); ?>"
-                                 class="nav-mega-card-img">
-                        <?php endif; ?>
-                        <div class="nav-mega-card-body">
-                            <span class="nav-mega-card-title"><?php echo esc_html($default_card['title']); ?></span>
-                            <?php if (!empty($default_card['price'])) : ?>
-                                <span class="nav-mega-card-price"><?php echo $default_card['price']; ?></span>
-                            <?php endif; ?>
+                <div class="nav-mega-col-heading">Polecany</div>
+                <div class="nav-mega-cards-wrap" data-default-card="card-<?php echo (int) $default_featured_id; ?>">
+                    <?php
+                    // Collect unique featured product IDs (default + each brand)
+                    $featured_ids = [$default_featured_id => 'default'];
+                    foreach ($brands as $brand) {
+                        $fid = child_get_category_featured_product_id($brand['term']->term_id);
+                        if ($fid && !isset($featured_ids[$fid])) {
+                            $featured_ids[$fid] = 'brand-' . $brand['term']->term_id;
+                        }
+                    }
+                    // Map brand_id → featured_product_id for JS
+                    $brand_to_card = ['default' => $default_featured_id];
+                    foreach ($brands as $brand) {
+                        $brand_to_card['brand-' . $brand['term']->term_id] = child_get_category_featured_product_id($brand['term']->term_id);
+                    }
+
+                    // Render one card per unique featured product
+                    foreach ($featured_ids as $fid => $_key) {
+                        if (!$fid) continue;
+                        $product_obj = wc_get_product($fid);
+                        if (!$product_obj || !$product_obj->is_visible()) continue;
+                        ?>
+                        <div class="nav-mega-card-item" data-card-for="card-<?php echo (int) $fid; ?>">
+                            <?php
+                            $GLOBALS['product'] = $product_obj;
+                            setup_postdata($fid);
+                            get_template_part('template-parts/product/card-vertical');
+                            wp_reset_postdata();
+                            ?>
                         </div>
-                    </a>
-                <?php endif; ?>
+                        <?php
+                    }
+                    ?>
+                </div>
             </div>
 
         </div>
