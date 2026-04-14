@@ -239,13 +239,60 @@ function child_render_mega_menu() {
 }
 
 /**
+ * Get representative product for a category (first published product).
+ * Uses get_posts — does NOT mutate global $post.
+ */
+function child_get_category_representative($term_id) {
+    if (!function_exists('wc_get_product')) return null;
+
+    static $cache = [];
+    if (isset($cache[$term_id])) return $cache[$term_id];
+
+    $posts = get_posts([
+        'post_type'      => 'product',
+        'post_status'    => 'publish',
+        'posts_per_page' => 1,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'tax_query'      => [[
+            'taxonomy'         => 'product_cat',
+            'field'            => 'term_id',
+            'terms'            => $term_id,
+            'include_children' => true,
+        ]],
+        'suppress_filters' => false,
+        'no_found_rows'    => true,
+    ]);
+
+    if (empty($posts)) {
+        $cache[$term_id] = null;
+        return null;
+    }
+
+    $post_id = $posts[0]->ID;
+    $product = wc_get_product($post_id);
+
+    $data = [
+        'title' => get_the_title($post_id),
+        'url'   => get_permalink($post_id),
+        'image' => get_the_post_thumbnail_url($post_id, 'medium') ?: '',
+        'price' => $product ? $product->get_price_html() : '',
+    ];
+
+    $cache[$term_id] = $data;
+    return $data;
+}
+
+/**
  * Render standalone mega dropdown for "Kompletne Haki" nav item.
- * Shows only the rich panel (brands → models).
+ * 3-column layout:
+ *  - col 1: Brands (level 2)
+ *  - col 2: Models + generations (level 3 + 4, shown on brand hover)
+ *  - col 3: Representative product card for active brand/category
  */
 function child_render_haki_mega_dropdown() {
     $categories = child_get_mega_menu_data();
 
-    // Find "Kompletne Haki" category
     $haki = null;
     foreach ($categories as $cat) {
         if (child_is_rich_category($cat)) {
@@ -255,16 +302,105 @@ function child_render_haki_mega_dropdown() {
     }
 
     if (!$haki) return;
+
+    $brands = $haki['children'];
+    if (empty($brands)) return;
+
+    // Default "featured" card = representative of whole category
+    $default_card = child_get_category_representative($haki['term']->term_id);
     ?>
     <div class="nav-mega-dropdown" id="nav-mega-haki">
-        <div class="nav-mega-inner">
-            <?php child_render_rich_panel($haki); ?>
-            <div class="nav-mega-footer">
-                <a href="<?php echo esc_url($haki['url']); ?>" class="mega-simple-cta">
-                    Zobacz wszystkie <?php echo esc_html($haki['term']->name); ?>
-                    <?php echo get_icon('chevron-right', 'icon-xs'); ?>
-                </a>
+        <div class="nav-mega-3col">
+
+            <?php // ─── COL 1: Brands ─── ?>
+            <nav class="nav-mega-brands" aria-label="Marki">
+                <div class="nav-mega-col-heading">Marka</div>
+                <ul>
+                    <?php foreach ($brands as $i => $brand) :
+                        $brand_rep = child_get_category_representative($brand['term']->term_id);
+                    ?>
+                        <li>
+                            <a href="<?php echo esc_url($brand['url']); ?>"
+                               class="nav-mega-brand<?php echo $i === 0 ? ' is-active' : ''; ?>"
+                               data-brand-id="brand-<?php echo $brand['term']->term_id; ?>"
+                               <?php if ($brand_rep) : ?>
+                                   data-card-image="<?php echo esc_url($brand_rep['image']); ?>"
+                                   data-card-title="<?php echo esc_attr($brand_rep['title']); ?>"
+                                   data-card-url="<?php echo esc_url($brand_rep['url']); ?>"
+                                   data-card-price="<?php echo esc_attr($brand_rep['price']); ?>"
+                               <?php endif; ?>>
+                                <span><?php echo esc_html($brand['term']->name); ?></span>
+                                <?php echo get_icon('chevron-right', 'icon-xs'); ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </nav>
+
+            <?php // ─── COL 2: Models + generations (per brand) ─── ?>
+            <div class="nav-mega-models">
+                <?php foreach ($brands as $i => $brand) : ?>
+                    <div class="nav-mega-models-panel<?php echo $i === 0 ? ' is-active' : ''; ?>"
+                         data-brand-panel="brand-<?php echo $brand['term']->term_id; ?>">
+                        <div class="nav-mega-col-heading">Model</div>
+                        <?php if (!empty($brand['children'])) : ?>
+                            <ul class="nav-mega-models-list">
+                                <?php foreach ($brand['children'] as $model) : ?>
+                                    <li>
+                                        <a href="<?php echo esc_url($model['url']); ?>" class="nav-mega-model">
+                                            <?php echo esc_html($model['term']->name); ?>
+                                            <?php if ($model['term']->count > 0) : ?>
+                                                <span class="nav-mega-count"><?php echo $model['term']->count; ?></span>
+                                            <?php endif; ?>
+                                        </a>
+                                        <?php if (!empty($model['children'])) : ?>
+                                            <ul class="nav-mega-generations">
+                                                <?php foreach ($model['children'] as $gen) : ?>
+                                                    <li>
+                                                        <a href="<?php echo esc_url(get_term_link($gen)); ?>">
+                                                            <?php echo esc_html($gen->name); ?>
+                                                        </a>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else : ?>
+                            <p class="nav-mega-empty">Brak modeli</p>
+                        <?php endif; ?>
+                    </div>
+                <?php endforeach; ?>
             </div>
+
+            <?php // ─── COL 3: Representative card ─── ?>
+            <div class="nav-mega-card" id="nav-mega-card">
+                <?php if ($default_card) : ?>
+                    <div class="nav-mega-col-heading">Polecany</div>
+                    <a href="<?php echo esc_url($default_card['url']); ?>" class="nav-mega-card-link">
+                        <?php if ($default_card['image']) : ?>
+                            <img src="<?php echo esc_url($default_card['image']); ?>"
+                                 alt="<?php echo esc_attr($default_card['title']); ?>"
+                                 class="nav-mega-card-img">
+                        <?php endif; ?>
+                        <div class="nav-mega-card-body">
+                            <span class="nav-mega-card-title"><?php echo esc_html($default_card['title']); ?></span>
+                            <?php if (!empty($default_card['price'])) : ?>
+                                <span class="nav-mega-card-price"><?php echo $default_card['price']; ?></span>
+                            <?php endif; ?>
+                        </div>
+                    </a>
+                <?php endif; ?>
+            </div>
+
+        </div>
+
+        <div class="nav-mega-footer">
+            <a href="<?php echo esc_url($haki['url']); ?>" class="mega-simple-cta">
+                Zobacz wszystkie <?php echo esc_html($haki['term']->name); ?>
+                <?php echo get_icon('chevron-right', 'icon-xs'); ?>
+            </a>
         </div>
     </div>
     <?php

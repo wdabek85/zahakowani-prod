@@ -349,8 +349,227 @@
     padding: 24px 40px;
 }
 
+/* ─── 3-column layout ─── */
+.nav-mega-3col {
+    display: grid;
+    grid-template-columns: 260px 1fr 280px;
+    min-height: 440px;
+    max-height: 560px;
+}
+
+.nav-mega-col-heading {
+    font-size: 11px;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 14px 20px 10px;
+    border-bottom: 1px solid var(--h-border);
+}
+
+/* ─── COL 1: Brands ─── */
+.nav-mega-brands {
+    background: var(--h-bg-muted);
+    border-right: 1px solid var(--h-border);
+    overflow-y: auto;
+}
+
+.nav-mega-brands ul {
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+}
+
+.nav-mega-brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    color: var(--h-heading);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background .1s, color .1s;
+    border-left: 3px solid transparent;
+}
+
+.nav-mega-brand:hover,
+.nav-mega-brand.is-active {
+    background: #fff;
+    color: var(--h-primary);
+    border-left-color: var(--h-primary);
+}
+
+.nav-mega-brand svg {
+    opacity: .4;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.nav-mega-brand:hover svg,
+.nav-mega-brand.is-active svg {
+    opacity: 1;
+    stroke: var(--h-primary);
+}
+
+/* ─── COL 2: Models + generations ─── */
+.nav-mega-models {
+    padding: 0;
+    overflow-y: auto;
+    position: relative;
+}
+
+.nav-mega-models-panel {
+    display: none;
+    padding: 0 24px 20px;
+}
+
+.nav-mega-models-panel.is-active {
+    display: block;
+}
+
+.nav-mega-models-panel .nav-mega-col-heading {
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 12px;
+}
+
+.nav-mega-models-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    columns: 2;
+    column-gap: 24px;
+}
+
+.nav-mega-models-list > li {
+    break-inside: avoid;
+    margin-bottom: 16px;
+}
+
+.nav-mega-model {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+    color: var(--h-heading);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color .15s;
+}
+
+.nav-mega-model:hover {
+    color: var(--h-primary);
+}
+
+.nav-mega-count {
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--h-primary);
+    border-radius: 10px;
+    padding: 1px 7px;
+    line-height: 1.4;
+}
+
+.nav-mega-generations {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0 0 0 10px;
+}
+
+.nav-mega-generations li + li {
+    margin-top: 2px;
+}
+
+.nav-mega-generations a {
+    display: block;
+    padding: 3px 0;
+    font-size: 12px;
+    color: var(--h-text);
+    text-decoration: none;
+    transition: color .15s;
+}
+
+.nav-mega-generations a:hover {
+    color: var(--h-primary);
+}
+
+.nav-mega-empty {
+    color: #999;
+    font-size: 13px;
+    font-style: italic;
+    margin: 0;
+}
+
+/* ─── COL 3: Representative card ─── */
+.nav-mega-card {
+    background: var(--h-bg-muted);
+    border-left: 1px solid var(--h-border);
+    padding: 0;
+    overflow-y: auto;
+}
+
+.nav-mega-card .nav-mega-col-heading {
+    margin-bottom: 16px;
+}
+
+.nav-mega-card-link {
+    display: block;
+    padding: 0 20px 20px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-mega-card-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    background: #fff;
+    display: block;
+    margin-bottom: 14px;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.nav-mega-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav-mega-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--h-heading);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.nav-mega-card-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--h-primary);
+}
+
+.nav-mega-card-price del {
+    font-size: 13px;
+    color: #999;
+    font-weight: 400;
+    margin-right: 6px;
+}
+
+.nav-mega-card-link:hover .nav-mega-card-title {
+    color: var(--h-primary);
+}
+
+/* ─── Footer ─── */
 .nav-mega-footer {
-    margin-top: 20px;
-    padding-top: 16px;
+    padding: 16px 24px;
     border-top: 1px solid var(--h-border);
 }

@@ -202,6 +202,114 @@
         triggerItem.addEventListener('mouseleave', hide);
         dropdown.addEventListener('mouseenter', function () { clearTimeout(hideTimer); });
         dropdown.addEventListener('mouseleave', hide);
+
+        // ─── Brand hover with intent detection (Amazon-style) ───
+        var brands = dropdown.querySelectorAll('.nav-mega-brand');
+        var cardEl = dropdown.querySelector('#nav-mega-card');
+        var modelsCol = dropdown.querySelector('.nav-mega-models');
+        var brandsCol = dropdown.querySelector('.nav-mega-brands');
+
+        var switchTimer = null;
+        var lastMouseX = 0;
+        var lastMouseY = 0;
+        var lastMouseTime = 0;
+
+        // Track mouse position globally while menu is open
+        dropdown.addEventListener('mousemove', function (e) {
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+            lastMouseTime = Date.now();
+        });
+
+        function switchBrand(brand) {
+            dropdown.querySelectorAll('.nav-mega-brand.is-active').forEach(function (el) {
+                el.classList.remove('is-active');
+            });
+            brand.classList.add('is-active');
+
+            var brandId = brand.getAttribute('data-brand-id');
+            dropdown.querySelectorAll('.nav-mega-models-panel.is-active').forEach(function (el) {
+                el.classList.remove('is-active');
+            });
+            var targetPanel = dropdown.querySelector('[data-brand-panel="' + brandId + '"]');
+            if (targetPanel) targetPanel.classList.add('is-active');
+
+            if (cardEl) updateCard(cardEl, brand);
+        }
+
+        // Detect if user is moving toward the models column
+        function isMovingToward(brand, mouseX, mouseY) {
+            if (!modelsCol) return false;
+
+            var modelsRect = modelsCol.getBoundingClientRect();
+            var brandRect = brand.getBoundingClientRect();
+
+            // User is already inside models column area? Keep current brand
+            if (mouseX >= modelsRect.left) return true;
+
+            // Calculate angle/direction from last mouse position to models column
+            // If mouse is moving right toward models (positive X velocity) — intent detected
+            var mouseMovedRight = mouseX > lastMouseX - 5;
+            var elapsed = Date.now() - lastMouseTime;
+
+            return mouseMovedRight && elapsed < 100;
+        }
+
+        brands.forEach(function (brand) {
+            brand.addEventListener('mouseenter', function (e) {
+                clearTimeout(switchTimer);
+
+                var mouseX = e.clientX;
+                var mouseY = e.clientY;
+
+                // If mouse is clearly moving toward models column, delay the switch
+                if (isMovingToward(brand, mouseX, mouseY)) {
+                    switchTimer = setTimeout(function () {
+                        switchBrand(brand);
+                    }, 250);
+                } else {
+                    // Normal hover — quick switch
+                    switchTimer = setTimeout(function () {
+                        switchBrand(brand);
+                    }, 80);
+                }
+            });
+
+            brand.addEventListener('mouseleave', function () {
+                // Don't cancel — let the timer complete if user settled on this brand
+            });
+        });
+
+        // When hovering over models column, cancel pending switch
+        if (modelsCol) {
+            modelsCol.addEventListener('mouseenter', function () {
+                clearTimeout(switchTimer);
+            });
+        }
+
+        function updateCard(cardEl, brandEl) {
+            var img = brandEl.getAttribute('data-card-image');
+            var title = brandEl.getAttribute('data-card-title');
+            var url = brandEl.getAttribute('data-card-url');
+            var price = brandEl.getAttribute('data-card-price');
+
+            if (!img && !title) {
+                cardEl.innerHTML = '';
+                return;
+            }
+
+            var html = '<div class="nav-mega-col-heading">Polecany</div>';
+            html += '<a href="' + (url || '#') + '" class="nav-mega-card-link">';
+            if (img) {
+                html += '<img src="' + img + '" alt="" class="nav-mega-card-img">';
+            }
+            html += '<div class="nav-mega-card-body">';
+            html += '<span class="nav-mega-card-title">' + (title || '') + '</span>';
+            if (price) html += '<span class="nav-mega-card-price">' + price + '</span>';
+            html += '</div></a>';
+
+            cardEl.innerHTML = html;
+        }
     }
 
     /* ─── Close dropdowns on outside click ─── */
