@@ -352,9 +352,8 @@
 /* ─── 3-column layout ─── */
 .nav-mega-3col {
     display: grid;
-    grid-template-columns: 260px 1fr 280px;
-    min-height: 440px;
-    max-height: calc(100vh - 240px);
+    grid-template-columns: 240px 1fr 260px;
+    max-height: calc(100vh - 200px);
 }
 
 .nav-mega-col-heading {
@@ -445,7 +444,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    columns: 3;
+    columns: 2;
     column-gap: 24px;
 }
 
@@ -454,10 +453,9 @@
     margin-bottom: 14px;
 }
 
-/* More columns when space allows */
-@media (min-width: 1280px) {
+@media (min-width: 1440px) {
     .nav-mega-models-list {
-        columns: 4;
+        columns: 3;
     }
 }
 
@@ -564,9 +562,29 @@
     display: block;
 }
 
-/* Make v-product-card work inside narrow sidebar */
+/* Make v-product-card work inside narrow sidebar — compact variant */
 .nav-mega-card-item .v-product-card {
     margin: 0;
+    gap: 10px;
+}
+
+.nav-mega-card-item .v-product-card__image {
+    aspect-ratio: 4 / 3;
+}
+
+.nav-mega-card-item .v-product-card__top {
+    gap: 10px;
+}
+
+.nav-mega-card-item .v-product-card__price {
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.nav-mega-card-item .v-product-card__cta {
+    padding: 6px 16px;
+    font-size: 14px;
+    line-height: 22px;
 }
 
 /* ─── Footer ─── */
