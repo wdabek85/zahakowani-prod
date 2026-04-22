@@ -1,5 +1,5 @@
 @import 'components/header.css';
-@import 'components/mega-menu.css';
+@import 'components/mega-menu.css?v=20260423';
 @import 'components/mobile-nav.css';
 @import 'components/category-filter.css';
 @import 'components/footer.css';
