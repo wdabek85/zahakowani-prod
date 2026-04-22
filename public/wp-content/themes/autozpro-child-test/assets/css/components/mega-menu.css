@@ -420,6 +420,8 @@
     overflow-y: auto;
     position: relative;
     min-height: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .nav-mega-models-panel {
@@ -428,7 +430,9 @@
 }
 
 .nav-mega-models-panel.is-active {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .nav-mega-models-panel .nav-mega-col-heading {
@@ -511,6 +515,28 @@
     font-size: 13px;
     font-style: italic;
     margin: 0;
+}
+
+/* CTA pinned to bottom of middle column — fills vertical space */
+.nav-mega-models-cta {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding: 10px 16px;
+    background: var(--h-primary);
+    color: #fff;
+    border-radius: var(--h-radius);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background .2s;
+}
+
+.nav-mega-models-cta:hover {
+    background: var(--h-primary-hover);
+    color: #fff;
 }
 
 /* ─── COL 3: Featured product card ─── */

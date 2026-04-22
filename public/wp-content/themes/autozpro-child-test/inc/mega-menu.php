@@ -361,6 +361,10 @@ function child_render_haki_mega_dropdown() {
                         <?php else : ?>
                             <p class="nav-mega-empty">Brak modeli</p>
                         <?php endif; ?>
+                        <a href="<?php echo esc_url($brand['url']); ?>" class="nav-mega-models-cta">
+                            Zobacz wszystkie haki <?php echo esc_html($brand['term']->name); ?>
+                            <?php echo get_icon('chevron-right', 'icon-xs'); ?>
+                        </a>
                     </div>
                 <?php endforeach; ?>
             </div>
