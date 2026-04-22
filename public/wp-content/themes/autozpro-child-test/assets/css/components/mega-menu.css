@@ -372,6 +372,7 @@
     background: var(--h-bg-muted);
     border-right: 1px solid var(--h-border);
     overflow-y: auto;
+    min-height: 0;
 }
 
 .nav-mega-brands ul {
@@ -418,6 +419,7 @@
     padding: 0;
     overflow-y: auto;
     position: relative;
+    min-height: 0;
 }
 
 .nav-mega-models-panel {
@@ -517,6 +519,7 @@
     border-left: 1px solid var(--h-border);
     padding: 0;
     overflow-y: auto;
+    min-height: 0;
 }
 
 .nav-mega-card .nav-mega-col-heading {
